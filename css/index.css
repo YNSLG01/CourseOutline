@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.homepage {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(image/satit1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    /* filter: blur(1px); */
+}
+
+.login {
+    width: 880px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 21%;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 5px 10px 10px 1px #d9d9d9;
+    background-color: #ffffff;
+}
+
+.login .content {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    background-image: url(image/8989.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px 0 0 20px;
+}
+
+.login .home {
+    width: 480px;
+    padding: 50px;
+}
+
+
+.account {
+    font-size: 14px;
+    
+}
+
+.account h4 {
+    font-size: 13px;
+    font-family: 'Arbutus Slab';
+}
+
+.button {
+    width: 100px;
+    height: 55px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+.button:active {
+    background-color: skyblue;
+    font-size: 30px;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.input-deg label{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
+.input-deg{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid skyblue;
+}
+
+.input-deg i {
+    width: 26px;
+    float: left;
+    text-align: center;
+}
+
+.input-deg input {
+    border: none;
+    outline: none;
+    background: none;
+    color: black;
+    font-size: 14px;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+    font-family: 'Arbutus Slab';
+}
+.remember span1 {
+    /* float: left; */
+    margin-left: 160px;
+}
+
+.remember {
+    float: left;
+    margin-left: -27px;
+}
+
+
