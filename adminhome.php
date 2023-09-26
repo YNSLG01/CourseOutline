@@ -33,8 +33,35 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="stylesheet" href="css/admin.css">
     <title>หน้าหลัก</title>
 </head>
-<?php include('navbar/navbar.php'); ?>
+<body>
 
+    <div class="sidebar">
+        <br>
+        <center>
+            <td><img src="image/logo1.png" ; width="70" ; height="110"></td>
+            <br>
+         <br>
+            <?php
+                // Display the user's image
+                echo "<img src='$loggedInImg'  width='100' height='100'>";
+                ?>
+            </center>
+            <center> <br>
+                <?php
+                // Display the name of the logged-in user
+                echo "<p>สวัสดี คุณ $loggedInName</p>";
+                ?>
+            <br>
+            <br>
+
+            <div class="form">
+                <!-- <a href="editprofile.php" align="left"></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a> -->
+            </div>
+            <br><br><br>
+            <a href="logout.php">ออกจากระบบ</a>
+
+        </center>
+    </div>
     <div class="main">
         <center>
             <h1>Hello Admin</h1>
@@ -50,5 +77,6 @@ if ($result && mysqli_num_rows($result) > 0) {
     </div>
 
 </body>
+
 
 </html>
