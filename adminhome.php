@@ -71,7 +71,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <td1><a href="a_approve.php"><button><img src="image/passport.png" width="180" height="180"><br>ประวัติการอนุมัติ</button></a></td1>
                 <td2><a href="a_user.php"><button><img src="image/usericon.png" width="180" height="180"><br>จัดการผู้ใช้งาน</button></a></td2>
                 <pre></pre>
-                <td3><a href="a_group.php"><button><img src="image/สาระ.png" width="180" height="180"><br>จัดการกลุ่มสาระ</button></a></td3>
+                <td3><a href="a_group.php"><button><img src="image/group.png" width="180" height="180"><br>จัดการกลุ่มสาระ</button></a></td3>
                 <td4><a href="a_notify.php"><button><img src="image/calender.png" width="180" height="180"><br>กำหนดการส่ง</button></a></td4>
             </div>
         </center>
