@@ -9,7 +9,7 @@
 <?php include('navbar/exebar.php'); ?>
 <style>
     .main {
-        margin-left: 150px;
+        margin-left: 350px;
         width: 100%;
         /* Same as the width of the sidenav */
         padding: 0px 10px;
@@ -18,7 +18,7 @@
     #myTable {
         border-collapse: collapse;
         /* Collapse borders */
-        width: 100%;
+        width: 80%;
         /* Full-width */
         border: 1px solid #ddd;
         /* Add a grey border */

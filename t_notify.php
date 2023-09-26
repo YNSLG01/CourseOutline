@@ -78,8 +78,8 @@
 	<div class="container">
 		<div class="main">
 			<center>
-				<h2> การแจ้งเตือน</h2>
-				<table size="100%" border="0">
+				<h2> การแจ้งเตือน</h2><br>
+				<table size="80%" border="0">
 					<tr>
 						<td width=40%>
 							<label>รายละเอียดรายวิชา ภาคเรียนที่</label>
@@ -90,7 +90,7 @@
 								<option value="2/2565">2/2565</option>
 							</select>
 						</td>
-						<td width=30%>
+						<td width=20%>
 							<label>ระดับ</label>
 							<select name="degree" id="degree" onChange="changeList(this.value);Tsubmit();">
 								<option value="ม.1" selected='selected'>ม.1</option>
@@ -101,7 +101,7 @@
 								<option value="ม.6">ม.6</option>
 							</select>
 						</td>
-						<td width=50%>
+						<td width=40%>
 							<label>กลุ่มสาระการเรียนรู้</label>
 							<select name="กลุ่มสาระการเรียนรู้" id="กลุ่มสาระการเรียนรู้">
 								<?php

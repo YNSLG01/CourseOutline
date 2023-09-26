@@ -13,6 +13,7 @@
 <style>
 	.container {
 		width: 70%;
+		margin-left: 280px;
 	}
 </style>
 

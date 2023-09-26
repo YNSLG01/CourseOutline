@@ -9,7 +9,17 @@
   <title>กำหนดการส่ง</title>
 </head>
 <?php include('navbar/nav.php'); ?>
+<style>
+  .h1{
+    margin-left: 200px;
+    font-size: 20px;
+}
+.container .mb-3{
+    width: 50%;
+    margin-left: 400px;
+}
 
+</style>
 <body>
   <div class="container">
     <div class="h1"><br>

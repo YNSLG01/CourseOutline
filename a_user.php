@@ -13,7 +13,14 @@ include 'conn.php';
 </head>
 <br>
 <?php include 'navbar/nav.php'; ?>
-
+<style>
+  .tt{
+    margin-left: 180px;
+  }
+  .button{
+    margin-left: 135px;
+  }
+</style>
 <body>
   <center>
     <div class="container">
