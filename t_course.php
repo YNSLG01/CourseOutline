@@ -17,7 +17,7 @@
 		#myTable {
 			border-collapse: collapse;
 			/* Collapse borders */
-			width: 100%;
+			width: 80%;
 			/* Full-width */
 			border: 1px solid #ddd;
 			/* Add a grey border */
@@ -51,7 +51,7 @@
 
 		.container {
 			font-size: 16px;
-			width: 100%;
+			width: 80%;
 			margin-left: 150px;
 		}
 
