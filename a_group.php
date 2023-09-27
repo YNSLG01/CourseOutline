@@ -6,7 +6,6 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="css/a_group.css">
   <title>การจัดการกลุ่มสาระ</title>
 </head>
 <?php include('navbar/nav.php'); ?>
@@ -48,8 +47,8 @@
                 <td><?= $row['d_name'] ?></td>
 
                 <td><a href="editgroup.php?id=<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
-                <td><a href=".php?id=<?= $row["department_id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
-                <td><a href="sc_page.php?" class="btn btn-info">รายละเอียด</a></td>
+                <td><a href="delgroup.php?id=<?= $row["department_id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
+                <td><a href="sc_page.php" class="btn btn-info">รายละเอียด</a></td>
                 <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->
               </tr>
             <?php
@@ -64,7 +63,19 @@
       </div>
     </div>
 </body>
-
+<style>
+  .tt{
+    width: 90%;
+    margin-left: 190px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .button {
+        margin-left: -800px;
+    }
+ 
+</style>
 </html>
 
 <script language="JavaScript">

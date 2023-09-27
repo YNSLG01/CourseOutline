@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'condb.php';
+include 'conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Retrieve form data
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
     // Bind parameters
-    mysqli_stmt_bind_param($stmt, "sssssssi", $name, $surname, $email, $tel, $newname, $username, $password, $usertype_id);
+    mysqli_stmt_bind_param($stmt, "ss", $name, $surname, $email, $tel, $img, $username, $password, $usertype_id);
 
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {

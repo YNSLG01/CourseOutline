@@ -70,7 +70,7 @@
 							<label>อัปโหลดเอกสาร</label>
 							<form id="uploadFileCourseSyllabus" method="post" enctype="multipart/form-data">
 								<input type="text" name="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br>
-								<font color="red">*อัพโหลดได้เฉพาะ .pdf เท่านั้น </font>
+								<font color="red">*อัปโหลดได้เฉพาะ .pdf เท่านั้น </font>
 								<input type="file" name="doc_file" required class="form-control" accept="application/pdf"> <br>
 								<button type="submit" class="btn btn-primary">Upload</button>
 								<button type="reset" class="btn btn-primary">reset</button>

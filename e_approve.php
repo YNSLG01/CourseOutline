@@ -24,7 +24,7 @@
         /* Full-width */
         border: 1px solid #ddd;
         /* Add a grey border */
-        font-size: 18px;
+        font-size: 16px;
         /* Increase font-size */
         background-color: #FFFFFF;
     }

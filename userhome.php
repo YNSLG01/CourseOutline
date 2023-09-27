@@ -60,9 +60,9 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
             <br><br><br><br>
             <div class="pic">
                 <td1><a href="t_course.php"><button><img src="image/course.png" width="180" height="180"><br>ประมวลรายวิชา</button></a></td1>
-                <td2><a href="t_upload.php"><button><img src="image/upload.png" width="180" height="180"><br>อัพโหลดประมวลรายวิชา</button></a></td2>
+                <td2><a href="t_upload.php"><button><img src="image/upload.png" width="180" height="180"><br>อัปโหลดประมวลรายวิชา</button></a></td2>
                 <pre></pre>
-                <td3><a href="t_approve.php"><button><img src="image/666666.png" width="180" height="180"><br>การอนุมัติ</button></a></td3>
+                <td3><a href="t_approve.php"><button><img src="image/666666.png" width="180" height="180"><br>ประวัติการอนุมัติ</button></a></td3>
                 <td4><a href="t_notify.php"><button><img src="image/notify.png" width="180" height="180"><br>การแจ้งเตือน</button></a></td4>
             </div>
         </center>
