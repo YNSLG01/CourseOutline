@@ -12,8 +12,8 @@
 <?php include 'navbar/usernav.php'; ?>
 <style>
 	.container {
-		width: 70%;
-		margin-left: 280px;
+		margin-left: 200px;
+		width: 80%;
 	}
 </style>
 
@@ -283,7 +283,7 @@
 	});
 </script>
 
-<!-- <script>
+<script>
 	$(document).ready(function() {
 		$("select").selectize();
 		$("#uploadFileCourseSyllabus").submit(function(event) {
@@ -359,7 +359,7 @@
 			});
 		});
 	});
-</script> -->
+</script>
 
 
 </html>

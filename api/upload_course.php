@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['doc_file']) && $_FILES['doc_file']['error'] === UPLOAD_ERR_OK) {
         $doc_name = $_POST['doc_name'];
         $department_id = $_POST['department_id'];
-        // $status = $_POST['status'];
-        $status = 1;
+        $status = $_POST['status'];
+
         // Ensure the file is a PDF
         $file_extension = strtolower(pathinfo($_FILES['doc_file']['name'], PATHINFO_EXTENSION));
 
@@ -18,35 +18,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Generate a unique filename for the uploaded file
             $new_filename = uniqid('doc_') . '.' . $file_extension;
             $upload_path = $upload_dir . $new_filename;
-            $res['message'] = "2";
+
             // Move the uploaded file to the upload directory
             if (move_uploaded_file($_FILES['doc_file']['tmp_name'], $upload_path)) {
-                $res['message'] = "อัปโหลดไฟล์สำเร็จ";
                 // Insert the file information into the database
-                // $stmt = $conn->prepare("INSERT INTO tbl_pdf (doc_name, doc_file, department_id, status) VALUES (?, ?, ?, ?)");
-                // $stmt->bind_param("ssss", $doc_name, $new_filename, $department_id, $status);
-                // $res['message'] = print_r($stmt);
-               $sql ="INSERT INTO `tbl_pdf`( `doc_name`, `doc_file`, `status`) VALUES ('".$doc_name."', '".$new_filename."',  $status)";
-               $res['message'] =$sql;
-                  if(mysqli_query($conn,$sql)){
+                $stmt = $conn->prepare("INSERT INTO tbl_pdf (doc_name, doc_file, department_id, status) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $doc_name, $new_filename, $department_id, $status);
+
+                if ($stmt->execute()) {
                     $res['code'] = 1;
                     $res['message'] = "อัปโหลดไฟล์สำเร็จ";
                     $res['redirect'] = 't_course.php';
-               }else{
-                $res['message'] = "เกิดข้อผิดพลาดในการบันทึกข้อมูล";
-               }
-               // if ($stmt->execute()) {
-                // //     $res['code'] = 1;
-                // //     $res['message'] = "อัปโหลดไฟล์สำเร็จ";
-                // //     $res['redirect'] = 't_course.php';
-                // } else {
-                // //     // Error inserting data into the database
-                // //     $res['message'] = "เกิดข้อผิดพลาดในการบันทึกข้อมูล";
-                // $res['message'] = $stmt->error;
-                // }
+                } else {
+                    // Error inserting data into the database
+                    $res['message'] = "เกิดข้อผิดพลาดในการบันทึกข้อมูล";
+                }
 
                 // Close the database connection
-                // $stmt->close();
+                $stmt->close();
             } else {
                 // Error moving the uploaded file
                 $res['message'] = "เกิดข้อผิดพลาดในการอัปโหลดไฟล์";

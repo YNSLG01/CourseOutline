@@ -123,19 +123,21 @@
 
                         // Loop through the results and display rows with status 1
                         foreach ($result as $row) {
-                            if ($row['status'] == 2) {
+                            if ($row['status'] == 2 || $row['status'] == 4) {
                         ?>
                                 <tr>
-                                    <td><?= $row['s_id'] ?></td>
+                                    <td><?= $row['subject_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
-                                    <td><?= $row['degree'] ?></td>
+                                    <td><?= $row['class_id'] ?></td>
                                     <td><a href="h_history.php">ดาวน์โหลด</a></td>
                                     <td><?php 
                                     if ($row['status'] == 2) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
+                                    }elseif($row['status'] == 4) {
+                                        echo '<span class="green-text">ไม่อนุมัติ</span>';
                                     }else{
-                                        echo "<?= $row[degree] ?>";
+                                        echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
                                 </tr>

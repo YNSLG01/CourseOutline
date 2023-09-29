@@ -46,11 +46,11 @@
         ?>
        <tr>
     <!-- <td><?= $row['tbl_id'] ?></td> -->
-    <td><?= $row['s_id'] ?></td>
+    <td><?= $row['subject_id'] ?></td>
     <td><?= $row['doc_name'] ?></td>
     <td><?= $row['doc_file'] ?></td>
     <td><?= $row['date'] ?></td> 
-    <td><?= $row['degree'] ?></td>
+    <td><?= $row['class_id'] ?></td>
     <td><a href="view.php" class="btn btn-warning">Review</a></td>
     <td><a href="a_history.php?id=<?= $row["tbl_id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
 </tr>

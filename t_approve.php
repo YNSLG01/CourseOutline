@@ -132,14 +132,14 @@
                                     <td><?= $row['tbl_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
-                                    <td><?= $row['degree'] ?></td>
+                                    <td><?= $row['class_id'] ?></td>
                                     <td><a href="/dowloads<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
                                     <!-- <td><a href="h_history.php">ดาวน์โหลด</a></td> -->
                                     <td><?php 
                                     if ($row['status'] == 3) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
                                     }else{
-                                        echo "<?= $row[degree] ?>";
+                                        echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
                                     

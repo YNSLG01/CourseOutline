@@ -127,14 +127,15 @@
                         ?>
                                 <tr>
                                     <td><?= $row['tbl_id'] ?></td>
-                                    <td><?= $row['s_id'] ?></td>
+                                    <td><?= $row['subject_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
-                                    <td><?= $row['degree'] ?></td>
+                                    <td><?= $row['class_id'] ?></td>
                                     <td><a href="/dowloads<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
                                     <!-- <td><a href="h_history.php">ดาวน์โหลด</a></td> -->
                                     <td><button class="approve-button" data-document-id="<?= $row['tbl_id'] ?>">อนุมัติ</button></td>
-                                    <td><button><a href="h_noapprove.php" style="background-color: red;">ไม่อนุมัติ</a></button></td>
+                                    <td><button class="disapprove-button" data-document-id="<?= $row['tbl_id'] ?>">ไม่อนุมัติ</button>
+                                    </td>
                                 </tr>
                         <?php
                             }
@@ -180,6 +181,111 @@
                             });
                         });
                     </script>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            // Add a click event listener to the disapprove buttons
+                            const disapproveButtons = document.querySelectorAll(".disapprove-button");
+                            disapproveButtons.forEach(button => {
+                                button.addEventListener("click", function() {
+                                    // Get the document ID from the data attribute
+                                    const documentId = this.getAttribute("data-document-id");
+
+                                    // Display a SweetAlert confirmation dialog
+                                    Swal.fire({
+                                        title: 'ยืนยันการไม่อนุมัติ?',
+                                        text: "คุณต้องการไม่อนุมัติเอกสารนี้หรือไม่?",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'ไม่อนุมัติ',
+                                        cancelButtonText: 'ยกเลิก'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // User confirmed, send an AJAX request to update the status
+                                            const xhr = new XMLHttpRequest();
+                                            xhr.open("POST", "h_noapprove_subject.php", true);
+                                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                            xhr.onreadystatechange = function() {
+                                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                                    // Handle the response here if needed
+                                                    // For example, you can show a success message
+                                                    Swal.fire('ไม่อนุมัติเรียบร้อย', '', 'success');
+                                                    // Optionally, you can remove or hide the row from the table
+                                                    // e.g., const row = button.closest("tr"); row.remove();
+                                                }
+                                            };
+                                            xhr.send("tbl_id=" + documentId);
+                                        }
+                                    });
+                                });
+                            });
+                        });
+                    </script>
+
+                    <!-- Add this code in the head section, after including SweetAlert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-b0ExaZq2ST93l9l3rSK1jNqCr7eC7y1Ff6C8tH09tqkR2vHbQTdmlZ2ud5Ol6qHJ" crossorigin="anonymous">
+
+<!-- ... Your existing head section ... -->
+
+<!-- Add this script after your existing scripts -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const disapproveButtons = document.querySelectorAll(".disapprove-button");
+    disapproveButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const documentId = this.getAttribute("data-document-id");
+
+            // Display a modal for entering details and attaching a file
+            Swal.fire({
+                title: 'ไม่อนุมัติ',
+                html: `
+                    <input id="text" class="swal2-input" placeholder="รายละเอียด">
+                    <input type="file" id="file" class="swal2-file" accept=".pdf, .jpg, .jpeg, .png">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'ส่งข้อมูล',
+                cancelButtonText: 'ยกเลิก',
+                preConfirm: () => {
+                    const text = document.getElementById('text').value;
+                    const fileInput = document.getElementById('file');
+                    const file = fileInput.files[0];
+
+                    // FormData object to send details and file to the server
+                    const formData = new FormData();
+                    formData.append('tbl_id', documentId);
+                    formData.append('text', text);
+                    formData.append('file', file);
+
+                    // AJAX request to update data on the server
+                    fetch('h_noapprove_subject.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // You can also show a success message here if needed
+                            Swal.fire('ข้อมูลถูกส่งเรียบร้อย', '', 'success');
+                        } else {
+                            // Handle errors if necessary
+                            Swal.fire('เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Handle errors if necessary
+                        Swal.fire('เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้', 'error');
+                    });
+                }
+            });
+        });
+    });
+});
+
+</script>
+
 
                     <!-- <script>
                         document.addEventListener("DOMContentLoaded", function() {

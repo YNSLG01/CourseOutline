@@ -156,6 +156,8 @@
 									<th width=10%>ระดับชั้น</th>
 									<th width=20%>ดาวน์โหลด</th>
 									<th width=10%>สถานะ</th>
+									<th width=20%>ข้อเสนอแนะ</th>
+									<th width=20%>เอกสารแนบ</th>
 									<th width=10%>ลบ</th>
 
 								</tr>
@@ -314,11 +316,12 @@ $result = $stmt->fetchAll();
 foreach ($result as $row) {
 ?>
 	<tr>
-		<td><?= $row['s_id'] ?></td>
+		<td><?= $row['subject_id'] ?></td>
 		<td><?= $row['doc_name'] ?></td>
 		<td><?= $row['date'] ?></td>
-		<td><?= $row['degree'] ?></td>
-		<td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank"> <img src="image/download.png" width="10%"></a></td>
+		<td><?= $row['class_id'] ?></td>
+		<td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
+
 
 		<td><?php
 			if ($row['status'] == 1) {
@@ -327,11 +330,16 @@ foreach ($result as $row) {
 				echo '2'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2
 			} elseif ($row['status'] == 3) {
 				echo 'ผ่านการอนุมัติ'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3
-			} else {
-				echo 'สถานะไม่ระบุ'; // เพิ่มข้อความเมื่อ status ไม่ใช่ 1, 2, หรือ 3
+			} elseif ($row['status'] == 4) {
+				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ หัวหน้ากลุ่มไม่อนุมัติ
+			} elseif ($row['status'] == 5) {
+				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
+			} elseif ($row['status'] == 3) {
+				echo 'สถานะไม่ระบุ';
 			}
 			?>
 		</td>
-
+		<td><?= $row['text'] ?></td>
+		<td><a href="downloads/<?php echo $row['file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></a></td>
 		<td><a href="t_delete.php?id=<?= $row["tbl_id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
 	<?php } ?>

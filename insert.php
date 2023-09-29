@@ -12,6 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $usertype_id = $_POST['usertype_id']; // Corrected field name to match the form
+    $department_id = $_POST['department_id']; // Corrected field name to match the form
+    $subject_id = $_POST['subject_id']; // Corrected field name to match the form
 
     // File Upload Handling
     if (!empty($img)) {
@@ -35,21 +37,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    if ($usertype_id == 2) {
+        // If usertype_id is 2, insert into the teacher table
+        $stmt = mysqli_prepare($conn, "INSERT INTO teacher (name, lastname, subject_id, department_id) VALUES ( ?, ?, ?, ?)");
+    } else {
+        // If usertype_id is not 2, insert into the user table
+        $stmt = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id, department_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    }
 
     // Bind parameters
-    mysqli_stmt_bind_param($stmt, "ss", $name, $surname, $email, $tel, $img, $username, $password, $usertype_id);
+    if ($usertype_id == 2) {
+        // If usertype_id is 2, insert into both teacher and user tables
+        $stmt_teacher = mysqli_prepare($conn, "INSERT INTO teacher (name, lastname, department_id, subject_id) VALUES (?, ?, ?, ?)");
 
-    // Execute the statement
-    if (mysqli_stmt_execute($stmt)) {
+        // Bind parameters for teacher table
+        mysqli_stmt_bind_param($stmt_teacher, "ssis", $name, $surname, $department_id, $subject_id);
+
+        // Execute the teacher statement
+        mysqli_stmt_execute($stmt_teacher);
+
+        // Close the teacher statement
+        mysqli_stmt_close($stmt_teacher);
+    }
+
+
+    $stmt_user = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id, department_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Bind parameters for user table
+    mysqli_stmt_bind_param($stmt_user, "sssssssssi", $name, $surname, $email, $tel, $newname, $username, $password, $usertype_id, $department_id, $subject_id);
+
+    // Execute the user statement
+    if (mysqli_stmt_execute($stmt_user)) {
         echo "<script>alert('บันทึกข้อมูลเรียบร้อย');</script>";
         echo "<script>window.location='a_user.php';</script>";
     } else {
         echo "<script>alert('ไม่สามารถบันทึกข้อมูลได้');</script>";
     }
 
-    // Close the statement and connection
-    mysqli_stmt_close($stmt);
+    // Close the user statement and connection
+    mysqli_stmt_close($stmt_user);
     mysqli_close($conn);
 }
 ?>
