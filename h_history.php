@@ -49,9 +49,14 @@
     #myTable tr:hover {
         /* Add a grey background color to the table header and on hover */
         background-color: #d9d9d9;
-    }.green-text {
+    }
+    .green-text {
         color: green;
     }
+    .red-text {
+        color: red;
+    }
+
 </style>
 
 <body>
@@ -117,7 +122,9 @@
                         require_once 'connect.php';
 
                         // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT * FROM tbl_pdf");
+                        $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
+                        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
+                        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
                         $stmt->execute();
                         $result = $stmt->fetchAll();
 
@@ -126,7 +133,7 @@
                             if ($row['status'] == 2 || $row['status'] == 4) {
                         ?>
                                 <tr>
-                                    <td><?= $row['subject_id'] ?></td>
+                                    <td><?= $row['code_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
                                     <td><?= $row['class_id'] ?></td>
@@ -135,7 +142,7 @@
                                     if ($row['status'] == 2) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
                                     }elseif($row['status'] == 4) {
-                                        echo '<span class="green-text">ไม่อนุมัติ</span>';
+                                        echo '<span class="red-text">ไม่อนุมัติ</span>';
                                     }else{
                                         echo "<?= $row[class_id] ?>";
                                     }

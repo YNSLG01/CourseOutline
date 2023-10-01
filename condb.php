@@ -30,37 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $username;
         header("location:userhome.php");
     }
-    if ($row["usertype_id"] == "10") {
-        $_SESSION["username"] = $username;
-        header("location: executivehome.php");
-    }
     if ($row["usertype_id"] == "3") {
-        $_SESSION['username'] = $username;
+        $_SESSION["username"] = $username;
         header("location: headhome.php");
     }
     if ($row["usertype_id"] == "4") {
         $_SESSION['username'] = $username;
-        header("location: headhome.php");
-    }
-    if ($row["usertype_id"] == "5") {
-        $_SESSION['username'] = $username;
-        header("location: headhome.php");
-    }
-    if ($row["usertype_id"] == "6") {
-        $_SESSION['username'] = $username;
-        header("location: headhome.php");
-    }
-    if ($row["usertype_id"] == "7") {
-        $_SESSION['username'] = $username;
-        header("location: headhome.php");
-    }
-    if ($row["usertype_id"] == "8") {
-        $_SESSION['username'] = $username;
-        header("location: headhome.php");
-        
-    if ($row["usertype_id"] == "9") {
-        $_SESSION['username'] = $username;
-        header("location: headhome.php");
+        header("location: executivehome.php");
+
       
     } else {
         echo "<script>";
@@ -69,6 +46,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "</script>";
     }
 }  
-   
-
-}

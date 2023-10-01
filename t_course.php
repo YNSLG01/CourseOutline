@@ -17,7 +17,7 @@
 		#myTable {
 			border-collapse: collapse;
 			/* Collapse borders */
-			width: 80%;
+			width: 100%;
 			/* Full-width */
 			border: 1px solid #ddd;
 			/* Add a grey border */
@@ -51,7 +51,7 @@
 
 		.container {
 			font-size: 16px;
-			width: 80%;
+			width: 100%;
 			margin-left: 150px;
 		}
 
@@ -66,6 +66,18 @@
 
 		.input h2 {
 			margin-top: 50px;
+		}
+
+		.orange-text {
+			color: orange;
+		}
+
+		.green-text {
+			color: green;
+		}
+
+		.red-text {
+			color: red;
 		}
 	</style>
 </head>
@@ -151,17 +163,14 @@
 							<table id="myTable">
 								<tr class="header">
 									<th width=10%>รหัสวิชา</th>
-									<th width=20%>ชื่อวิชา</th>
-									<th width=20%>วันเดือนปี</th>
+									<th width=15%>ชื่อวิชา</th>
+									<th width=15%>วันเดือนปี</th>
 									<th width=10%>ระดับชั้น</th>
-									<th width=20%>ดาวน์โหลด</th>
-									<th width=10%>สถานะ</th>
-									<th width=20%>ข้อเสนอแนะ</th>
-									<th width=20%>เอกสารแนบ</th>
-									<th width=10%>ลบ</th>
-
+									<th width=15%>ดาวน์โหลด</th>
+									<th width=15%>สถานะ</th>
+									<th width=10%>ข้อเสนอแนะ</th>
+									<th width=10%>เอกสารแนบ</th>
 								</tr>
-
 						</div>
 				</center>
 			</div>
@@ -310,36 +319,39 @@
 <?php
 //คิวรี่ข้อมูลมาแสดงในตาราง
 require_once 'connect.php';
-$stmt = $conn->prepare("SELECT* FROM tbl_pdf");
+$stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
+                        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
+                        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
 $stmt->execute();
 $result = $stmt->fetchAll();
 foreach ($result as $row) {
 ?>
 	<tr>
-		<td><?= $row['subject_id'] ?></td>
+		<td><?= $row['code_id'] ?></td>
 		<td><?= $row['doc_name'] ?></td>
 		<td><?= $row['date'] ?></td>
 		<td><?= $row['class_id'] ?></td>
-		<td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
+		
+		<td><a href="/downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
 
 
 		<td><?php
 			if ($row['status'] == 1) {
-				echo '<span class="green-text">รออนุมัติ</span>';
+				echo '<span class="orange-text">รออนุมัติ</span>';
 			} elseif ($row['status'] == 2) {
 				echo '2'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2
 			} elseif ($row['status'] == 3) {
-				echo 'ผ่านการอนุมัติ'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3
+				echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3
 			} elseif ($row['status'] == 4) {
 				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ หัวหน้ากลุ่มไม่อนุมัติ
 			} elseif ($row['status'] == 5) {
 				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
-			} elseif ($row['status'] == 3) {
+			} elseif ($row['status'] == 6) {
 				echo 'สถานะไม่ระบุ';
 			}
 			?>
 		</td>
 		<td><?= $row['text'] ?></td>
 		<td><a href="downloads/<?php echo $row['file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></a></td>
-		<td><a href="t_delete.php?id=<?= $row["tbl_id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
+
 	<?php } ?>

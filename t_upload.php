@@ -69,7 +69,7 @@
 							<br>
 							<label>อัปโหลดเอกสาร</label>
 							<form id="uploadFileCourseSyllabus" method="post" enctype="multipart/form-data">
-								<input type="text" name="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br>
+								<!-- <input type="text" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br> -->
 								<font color="red">*อัปโหลดได้เฉพาะ .pdf เท่านั้น </font>
 								<input type="file" name="doc_file" required class="form-control" accept="application/pdf"> <br>
 								<button type="submit" class="btn btn-primary">Upload</button>
@@ -192,6 +192,81 @@
 				console.error("Error fetching data:", error);
 			}
 		});
+
+		$('#department').selectize({
+			onChange: function(value) {
+				// Handle the change event here
+				console.log('Selected value:', value);
+
+				$.ajax({
+					url: 'api/select_subjects_by_department_id.php?department_id=' + value,
+					type: 'GET',
+					dataType: 'json',
+					success: async function(response) {
+						console.log(response)
+
+						if (response.code === 1) {
+
+							// Get Selectize instance for the "subjects" dropdown
+							var subjectsSelectize = $('#subjects')[0].selectize;
+
+							// Clear all existing options
+							await subjectsSelectize.clearOptions();
+
+							// Add the new options from the response
+							await response.data.forEach(function(subject) {
+								subjectsSelectize.addOption({
+									value: subject.subject_id,
+									text: subject.s_name
+								});
+							});
+
+							// Set the new options as selected
+							await subjectsSelectize.setValue('');
+
+							// Populate the select dropdown with data from the API
+							// var select = $('#subjects').selectize()[0].selectize;
+							// $.each(response.data, function(index, item) {
+							// 	select.addOption({
+							// 		value: item.subject_id,
+							// 		text: item.s_name
+							// 	});
+							// });
+						} else {
+							console.error(response.message);
+						}
+					},
+					error: function(error) {
+						console.error("Error fetching data:", error);
+					}
+				});
+
+				// You can perform additional actions based on the selected value
+			}
+		});
+		// Initialize Selectize on the #subjects element
+		var subjectsSelectize = $('#subjects').selectize({
+			// Your Selectize options, if any
+		})[0].selectize;
+
+		// Attach the onChange event after initialization
+		subjectsSelectize.on('change', function(value) {
+			// Handle the change event here
+			console.log('Selected value:', value);
+
+			// Get the text of the selected option
+			var selectedOption = subjectsSelectize.options[value];
+			var selectedTextDocName = selectedOption ? selectedOption.text : '';
+
+			console.log('Selected text:', selectedTextDocName);
+			$('#doc_name').val(selectedTextDocName)
+
+
+			// Add your additional code here
+			// For example, you can make an AJAX request or perform any other action
+		});
+
+
 	});
 </script>
 <script>
@@ -224,64 +299,6 @@
 
 
 
-<script>
-	$(document).ready(function() {
-
-		$("select").selectize();
-		$("#uploadFileCourseSyllabus").submit(function(event) {
-			event.preventDefault(); // Prevent the default form submission
-
-			var formData = new FormData(this); // Create a FormData object from the form
-
-			$.ajax({
-				url: 'api/upload_course.php', // The URL to send the data to
-				type: "POST",
-				data: formData,
-				processData: false, // Important! Do not process the data
-				contentType: false, // Important! Set content type to false as jQuery will tell the server its a query string request
-				success: function(response) {
-					// Handle the server response here
-					console.log(response)
-					// Convert the response string to a JSON object
-					const jsonResponse = JSON.parse(response);
-
-					// Check the value of the 'code' property
-					if (jsonResponse.code == 1) {
-						// Show a SweetAlert message
-
-
-						Swal.fire({
-							icon: 'success',
-							title: 'Success',
-							text: jsonResponse.message
-						}).then((result) => {
-							// Redirect the user to the specified URL after closing the SweetAlert message
-							if (result.isConfirmed) {
-								// Redirect the user to the specified URL
-								window.location.href = jsonResponse.redirect;
-							}
-						});
-
-
-					} else {
-						// Handle other cases (e.g., error messages) here if needed
-						Swal.fire({
-							icon: 'error',
-							title: 'Error',
-							text: jsonResponse.message
-						});
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					// Handle any errors here
-					alert("Error uploading file: " + textStatus);
-				}
-			});
-		});
-
-
-	});
-</script>
 
 <script>
 	$(document).ready(function() {

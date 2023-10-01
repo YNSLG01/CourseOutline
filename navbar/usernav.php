@@ -41,7 +41,7 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
             ?>
         </center>
         <a href="userhome.php"></i><i class="bi bi-house-door"></i> หน้าหลัก</a>
-        <a href=""></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a>
+        <a href="t_profile.php"></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a>
         <a href="t_course.php"></i><i class="bi bi-journals"></i> ประมวลรายวิชา</a>
         <a href="t_upload.php"></i><i class="bi bi-file-earmark-arrow-up"></i> อัปโหลดประมวลรายวิชา</a>
         <a href="t_approve.php"></i><i class="bi bi-check2-square"></i> ประวัติการอนุมัติ</a>

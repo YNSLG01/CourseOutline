@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <?php require_once('import_header.php'); ?>   
-    <title>ฟอร์มเพิ่มข้อมูลผู้ใช้งาน</title>
+    <title>ฟอร์มเพิ่มรายวิชา</title>
+
 </head>
 <?php include('navbar/nav.php'); ?>
 
 <body>
     <center>
         <br><br>
-        <div class="h2">เพิ่มกลุ่มสาระ</div><br>
+        <div class="h2">เพิ่มวิชา</div><br>
     </center>
     <div class="container">
 
@@ -23,13 +24,13 @@
 
                 <form action="insert_g.php" method="POST" enctype="multipart/form-data">
                     <label>ลำดับ</label>
-                    <input type="number" name="department_id" class="form-control" placeholder="ลำดับ" required><br>
-                    <label>กลุ่มสาระ</label>
-                    <input type="text" name="d_name" class="form-control" placeholder="ชื่อกลุ่มสาระ" required><br>
+                    <input type="number" name="subject_id" class="form-control" placeholder="ลำดับ" required><br>
+                    <label>รายวิชา</label>
+                    <input type="text" name="s_name" class="form-control" placeholder="ชื่อวิชา" required><br>
                     
                         <center>
                             <input type="submit" value="submit" class="btn btn-success">
-                            <a href="a_group.php" class="btn btn-danger">Cancel</a>
+                            <a href="sc_page.php" class="btn btn-danger">Cancel</a>
                         </center>
                 </form>
             </div>

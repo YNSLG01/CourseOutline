@@ -52,6 +52,9 @@
     }.green-text {
         color: green;
     }
+    .red-text {
+        color: red;
+    }
 </style>
 
 <body>
@@ -123,19 +126,21 @@
 
                         // Loop through the results and display rows with status 1
                         foreach ($result as $row) {
-                            if ($row['status'] == 3) {
+                            if ($row['status'] == 3 || $row['status'] == 5) {
                         ?>
                                 <tr>
-                                    <td><?= $row['s_id'] ?></td>
+                                    <td><?= $row['subject_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
-                                    <td><?= $row['degree'] ?></td>
-                                    <td><a href="e_history.php">ดาวน์โหลด</a></td>
+                                    <td><?= $row['class_id'] ?></td>
+                                    <td><a href="h_history.php">ดาวน์โหลด</a></td>
                                     <td><?php 
                                     if ($row['status'] == 3) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
+                                    }elseif($row['status'] == 5) {
+                                        echo '<span class="red-text">ไม่อนุมัติ</span>';
                                     }else{
-                                        echo "<?= $row[degree] ?>";
+                                        echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
                                 </tr>

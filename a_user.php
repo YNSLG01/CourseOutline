@@ -59,7 +59,8 @@ include 'conn.php';
               <th>delete</th>
             </tr>
             <?php
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT user.* , usertype.description FROM `user`";
+            $sql .= "LEFT JOIN usertype ON user.usertype_id = usertype.usertype_id ";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($result)) {
 
@@ -73,7 +74,7 @@ include 'conn.php';
                 <td><img src="../img/<?= $row['img'] ?>" width="85" height="85"></td> <!-- Corrected src attribute -->
                 <td><?= $row['username'] ?></td>
                 <td><?= $row['password'] ?></td>
-                <td><?= $row['usertype_id'] ?></td>
+                <td><?= $row['description'] ?></td>
                 <td><a href="edit.php?id=<?= $row["id"] ?>" class="btn btn-warning">แก้ไข</a></td>
                 <td><a href="delete.php?id=<?= $row["id"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
               </tr>

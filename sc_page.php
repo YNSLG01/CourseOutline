@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="button">
                 <!-- <a href=".php" class="btn btn-warning mb-4">แก้ไข</a> -->
-                <a href=".php" class="btn btn-success mb-4">เพิ่มรายวิชา</a>
+                <a href="formsubject.php" class="btn btn-success mb-4">เพิ่มรายวิชา</a>
 
             </div>
             <div class="container" align="center">

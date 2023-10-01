@@ -59,7 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Close the teacher statement
         mysqli_stmt_close($stmt_teacher);
     }
+    if ($usertype_id == 1 || $usertype_id == 4) {
+        // If usertype_id is 1 or 4, insert into both teacher and user tables
+        $stmt_user = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id, department_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
+        // Bind parameters for user table
+        mysqli_stmt_bind_param($stmt_user, "sssssssssi", $name, $surname, $email, $tel, $newname, $username, $password, $usertype_id, $department_id, $subject_id);
+    
+        // Execute the teacher statement
+        mysqli_stmt_execute($stmt_user);
+    
+        // Close the teacher statement
+        mysqli_stmt_close($stmt_user);
+    }
 
     $stmt_user = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id, department_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
