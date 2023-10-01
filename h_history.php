@@ -133,21 +133,21 @@
                             if ($row['status'] == 2 || $row['status'] == 4) {
                         ?>
                                 <tr>
-                                    <td><?= $row['code_id'] ?></td>
-                                    <td><?= $row['doc_name'] ?></td>
-                                    <td><?= $row['date'] ?></td>
-                                    <td><?= $row['class_id'] ?></td>
-                                    <td><a href="h_history.php">ดาวน์โหลด</a></td>
-                                    <td><?php 
+                                <td><?= $row['code_id'] ?></td>
+                                <td><?= $row['doc_name'] ?></td>
+                                <td><?= $row['date'] ?></td>
+                                <td><?= $row['class_id'] ?></td>
+                                <td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
+                                <td><?php
                                     if ($row['status'] == 2) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
-                                    }elseif($row['status'] == 4) {
+                                    } elseif ($row['status'] == 4) {
                                         echo '<span class="red-text">ไม่อนุมัติ</span>';
-                                    }else{
+                                    } else {
                                         echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
-                                </tr>
+                            </tr>
                         <?php
                             }
                         }

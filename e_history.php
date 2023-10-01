@@ -49,9 +49,12 @@
     #myTable tr:hover {
         /* Add a grey background color to the table header and on hover */
         background-color: #d9d9d9;
-    }.green-text {
+    }
+
+    .green-text {
         color: green;
     }
+
     .red-text {
         color: red;
     }
@@ -106,49 +109,51 @@
                 </table>
 
                 <table id="myTable">
-                        <tr class="header">
-                            <th width="15%">รหัสวิชา</th>
-                            <th width="20%">ชื่อวิชา</th>
-                            <th width="20%">วัน/เดือน/ปี</th>
-                            <th width="10%">ระดับชั้น</th>
-                            <th width="15%">รายละเอียด</th>
-                            <th width="10%">สถานะ</th>
-                            
-                        </tr>
-                        <?php
-                        // Include the database connection
-                        require_once 'connect.php';
+                    <tr class="header">
+                        <th width="15%">รหัสวิชา</th>
+                        <th width="20%">ชื่อวิชา</th>
+                        <th width="20%">วัน/เดือน/ปี</th>
+                        <th width="10%">ระดับชั้น</th>
+                        <th width="15%">รายละเอียด</th>
+                        <th width="10%">สถานะ</th>
 
-                        // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT * FROM tbl_pdf");
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
+                    </tr>
+                    <?php
+                    // Include the database connection
+                    require_once 'connect.php';
 
-                        // Loop through the results and display rows with status 1
-                        foreach ($result as $row) {
-                            if ($row['status'] == 3 || $row['status'] == 5) {
-                        ?>
-                                <tr>
-                                    <td><?= $row['subject_id'] ?></td>
-                                    <td><?= $row['doc_name'] ?></td>
-                                    <td><?= $row['date'] ?></td>
-                                    <td><?= $row['class_id'] ?></td>
-                                    <td><a href="h_history.php">ดาวน์โหลด</a></td>
-                                    <td><?php 
+                    // Prepare and execute the SQL query
+                    $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
+                        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
+                        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+
+                    // Loop through the results and display rows with status 1
+                    foreach ($result as $row) {
+                        if ($row['status'] == 3 || $row['status'] == 5) {
+                    ?>
+                            <tr>
+                                <td><?= $row['code_id'] ?></td>
+                                <td><?= $row['doc_name'] ?></td>
+                                <td><?= $row['date'] ?></td>
+                                <td><?= $row['class_id'] ?></td>
+                                <td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
+                                <td><?php
                                     if ($row['status'] == 3) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
-                                    }elseif($row['status'] == 5) {
+                                    } elseif ($row['status'] == 5) {
                                         echo '<span class="red-text">ไม่อนุมัติ</span>';
-                                    }else{
+                                    } else {
                                         echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
-                                </tr>
-                        <?php
-                            }
+                            </tr>
+                    <?php
                         }
-                        ?>
-                    </table>
+                    }
+                    ?>
+                </table>
             </center>
         </div>
     </div>

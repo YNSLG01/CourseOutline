@@ -128,16 +128,14 @@
                             if ($row['status'] == 1) {
                         ?>
                                 <tr>
+                                    <td><?= $row['tbl_id'] ?></td>
                                     <td><?= $row['code_id'] ?></td>
-                                    <td><?= $row['subject_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
                                     <td><?= $row['class_id'] ?></td>
                                     <td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
-                                    <!-- <td><a href="h_history.php">ดาวน์โหลด</a></td> -->
                                     <td><button class="approve-button" data-document-id="<?= $row['tbl_id'] ?>">อนุมัติ</button></td>
                                     <td><button class="disapprove-button" data-document-id="<?= $row['tbl_id'] ?>">ไม่อนุมัติ</button>
-                                    </td>
                                 </tr>
                         <?php
                             }

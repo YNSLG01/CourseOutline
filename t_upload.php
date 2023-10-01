@@ -58,18 +58,19 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label for="coursecode">รหัสวิชา</label>
-								<select name="coursecode_id" id="coursecode">
+								<select name="course_id" id="coursecode">
 									<option value="">เลือกรหัสวิชา</option>
 								</select>
 							</div>
+							
 							<div class="form-group col-md-4" style="display: none;">
-								<label for="coursecode">สถานะ</label>
+								<label for="status">สถานะ</label>
 								<input type="text" name="status" id="status" value="1">
 							</div>
 							<br>
 							<label>อัปโหลดเอกสาร</label>
 							<form id="uploadFileCourseSyllabus" method="post" enctype="multipart/form-data">
-								<!-- <input type="text" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br> -->
+								<input type="text" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br>
 								<font color="red">*อัปโหลดได้เฉพาะ .pdf เท่านั้น </font>
 								<input type="file" name="doc_file" required class="form-control" accept="application/pdf"> <br>
 								<button type="submit" class="btn btn-primary">Upload</button>
@@ -265,8 +266,6 @@
 			// Add your additional code here
 			// For example, you can make an AJAX request or perform any other action
 		});
-
-
 	});
 </script>
 <script>
@@ -293,6 +292,78 @@
 			error: function(error) {
 				console.error("Error fetching data:", error);
 			}
+		});
+		$('#subjects').selectize({
+			onChange: function(value) {
+				// Handle the change event here
+				console.log('Selected value:', value);
+
+				$.ajax({
+					url: 'api/select_coursecode_by_subject_id.php?subject_id=' + value,
+					type: 'GET',
+					dataType: 'json',
+					success: async function(response) {
+						console.log(response)
+
+						if (response.code === 1) {
+
+							// Get Selectize instance for the "coursecode" dropdown
+							var coursecodeSelectize = $('#coursecode')[0].selectize;
+
+							// Clear all existing options
+							await coursecodeSelectize.clearOptions();
+
+							// Add the new options from the response
+							await response.data.forEach(function(coursecode) {
+								coursecodeSelectize.addOption({
+									value: coursecode.coursecode_id,
+									text: coursecode.code_id
+								});
+							});
+
+							// Set the new options as selected
+							await coursecodeSelectize.setValue('');
+
+							// Populate the select dropdown with data from the API
+							// var select = $('#coursecode').selectize()[0].selectize;
+							// $.each(response.data, function(index, item) {
+							// 	select.addOption({
+							// 		value: item.subject_id,
+							// 		text: item.s_name
+							// 	});
+							// });
+						} else {
+							console.error(response.message);
+						}
+					},
+					error: function(error) {
+						console.error("Error fetching data:", error);
+					}
+				});
+
+				// You can perform additional actions based on the selected value
+			}
+		});
+		// Initialize Selectize on the #coursecode element
+		var coursecodeSelectize = $('#coursecode').selectize({
+			// Your Selectize options, if any
+		})[0].selectize;
+
+		// Attach the onChange event after initialization
+		coursecodeSelectize.on('change', function(value) {
+			// Handle the change event here
+			console.log('Selected value:', value);
+
+			// Get the text of the selected option
+			// var selectedOption = coursecodeSelectize.options[value];
+			// var selectedTextDocName = selectedOption ? selectedOption.text : '';
+
+			// console.log('Selected text:', selectedTextDocName);
+			// $('#doc_name').val(selectedTextDocName)
+
+
+			// Add your additional code here
+			// For example, you can make an AJAX request or perform any other action
 		});
 	});
 </script>
@@ -349,6 +420,7 @@
 								doc_file: jsonResponse.savedFileName, // Get the saved file name from the response
 								department_id: formData.get('department_id'), // Get department_id from the form
 								status: formData.get('status') // Get status from the form
+
 								// Add other data as needed
 							},
 							success: function(databaseResponse) {

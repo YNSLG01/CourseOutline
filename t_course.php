@@ -328,11 +328,10 @@ foreach ($result as $row) {
 ?>
 	<tr>
 		<td><?= $row['code_id'] ?></td>
-		<td><?= $row['doc_name'] ?></td>
+		<td><?= $row['doc_name'] ?></td>		
 		<td><?= $row['date'] ?></td>
 		<td><?= $row['class_id'] ?></td>
-		
-		<td><a href="/downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
+		<td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
 
 
 		<td><?php
@@ -352,6 +351,6 @@ foreach ($result as $row) {
 			?>
 		</td>
 		<td><?= $row['text'] ?></td>
-		<td><a href="downloads/<?php echo $row['file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></a></td>
+		<td><a href="<?php echo $row['file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></a></td>
 
 	<?php } ?>

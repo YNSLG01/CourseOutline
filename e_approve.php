@@ -117,7 +117,9 @@
                         require_once 'connect.php';
 
                         // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT * FROM tbl_pdf");
+                        $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
+                        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
+                        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
                         $stmt->execute();
                         $result = $stmt->fetchAll();
 
@@ -127,11 +129,11 @@
                         ?>
                                 <tr>
                                     <td><?= $row['tbl_id'] ?></td>
-                                    <td><?= $row['subject_id'] ?></td>
+                                    <td><?= $row['code_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>
                                     <td><?= $row['class_id'] ?></td>
-                                    <td><a href="/dowloads<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
+                                    <td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
                                     <td><button class="approve-button" data-document-id="<?= $row['tbl_id'] ?>">อนุมัติ</button></td>
                                     <td><button class="disapprove-button" data-document-id="<?= $row['tbl_id'] ?>">ไม่อนุมัติ</button>
                                 </tr>
