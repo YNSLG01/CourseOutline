@@ -50,8 +50,6 @@ $row = mysqli_fetch_assoc($result);
         <div class="col-sm4">
             <form action="edit_tprofile.php" method="POST" enctype="multipart/form-data">
                 <center><img src="<?= $row['img'] ?>" alt="User Image" style="max-width: 200px; max-height: 200px;"></center><br>
-                <label>รหัส</label>
-                <input type="text" name="id" class="form-control" value="<?= $row['id'] ?>"><br>
                 <label>ชื่อ</label>
                 <input type="text" name="name" class="form-control" value="<?= $row['name'] ?>"><br>
                 <label>นามสกุล</label>
@@ -59,17 +57,15 @@ $row = mysqli_fetch_assoc($result);
                 <label>อีเมล</label>
                 <input type="email" name="email" class="form-control" value="<?= $row['email'] ?>"><br>
                 <label>เบอร์โทรศัพท์</label>
-                <input type="number" name="tel" class="form-control" value="<?= $row['tel'] ?>"><br>
+                <input type="number" a="tel" class="form-control" value="<?= $row['tel'] ?>"><br>
                 <label>ชื่อผู้ใช้</label>
                 <input type="username" name="username" class="form-control" value="<?= $row['username'] ?>"><br>
                 <label>รหัสผ่าน</label>
-                <input type="text" name="password" class="form-control" value="<?= $row['password'] ?>"><br>
-                <label>สถานะผู้ใช้งาน</label>
-                <input type="text" name="usertype" class="form-control" value="<?= $row['usertype_id'] ?>"><br>
+                <input type="text" a="password" class="form-control" value="<?= $row['password'] ?>"><br>
 
                 <center>
-                    <a href="edit_profile.php" class="btn btn-warning">Edit Profile</a>
-                    <a href="userhome.php" class="btn btn-danger">Back</a>
+                    <a href="a_editprofile.php" class="btn btn-warning">Edit Profile</a>
+                    <a href="adminhome.php" class="btn btn-danger">Back</a>
                 </center>
         </div>
     </div>

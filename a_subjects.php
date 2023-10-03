@@ -1,5 +1,26 @@
-  <?php include('conn.php');
-  ?>
+<?php
+include 'conn.php';
+
+// Check if the department_id is provided in the URL parameters
+if (isset($_GET['id'])) {
+    $department_id = $_GET['id'];
+
+    // Fetch information from the teacher and subject tables based on the department_id
+    $sql = "SELECT subjects.*, department.d_name FROM subjects
+            JOIN department ON subjects.department_id = department.department_id
+            WHERE subjects.department_id = $department_id";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        die("Query failed: " . mysqli_error($conn));
+    }
+} else {
+    // Handle the case when department_id is not provided
+    echo "Department ID is not specified.";
+    exit;
+}
+?>
   <!DOCTYPE html>
   <html>
 
@@ -16,13 +37,13 @@
         <div class="h2">
           <center>
             <br>
-            <h2>กลุ่มสาระการเรียนรู้</h2>
+            <h2>วิชา</h2>
             <br>
           </center>
         </div>
         <div class="button">
           <!-- <a href=".php" class="btn btn-warning mb-4">แก้ไข</a> -->
-          <a href="formgroup.php" class="btn btn-success mb-4">เพิ่มกลุ่มสาระ</a>
+          <a href="formsubjects.php" class="btn btn-success mb-4">เพิ่มวิชา</a>
 
         </div>
         <div class="container" aling="center">
@@ -31,24 +52,24 @@
               <tr>
 
                 <th style="width: 10%;"> ลำดับ</th>
-                <th style="width: 60%;"> กลุ่มสาระ</th>
+                <th style="width: 60%;">วิชา</th>
                 <th style="width: 9%;"> แก้ไข</th>
                 <th style="width: 7%;"> ลบ</th>
                 <th style="width: 11%;"> รายละเอียด</th>
               </tr>
               <?php
-            $sql = "SELECT * FROM department";
-            $result = mysqli_query($conn, $sql);
+            
+            
                       while ($row = mysqli_fetch_array($result)) {
 
               ?>
                 <tr>
-                  <td><?= $row['department_id'] ?></td>
-                  <td><?= $row['d_name'] ?></td>
+                  <td><?= $row['subject_id'] ?></td>
+                  <td><?= $row['s_name'] ?></td>
 
-                  <td><a href="editgroup.php?id=<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
-                  <td><a href="delgroup.php?id=<?= $row["d_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
-                  <td><a href="a_subjects.php?id=<?= $row["department_id"] ?>" class="btn btn-info">รายละเอียด</a></td>
+                  <td><a href="editsubjects.php?id=<?= $row["subject_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
+                  <td><a href="delsubjects.php?id=<?= $row["s_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
+                  <td><a href="a_teacher.php?id=<?= $row["department_id"] ?>" class="btn btn-info">รายละเอียด</a></td>
                   <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->
                 </tr>
               <?php

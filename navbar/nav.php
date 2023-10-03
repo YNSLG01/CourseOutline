@@ -51,7 +51,7 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
                 ?>
         </center>
         <a href="adminhome.php"></i><i class="bi bi-house-door"></i> หน้าหลัก</a>
-        <a href="profile.php"></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a>
+        <a href="a_profile.php"></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a>
         <a href="a_approve.php"></i><i class="bi bi-check2-square"></i> ประวัติการอนุมัติ</a>
         <a href="a_user.php"></i><i class="bi bi-people"></i> จัดการผู้ใช้งาน</a>
         <a href="a_group.php"></i><i class="bi bi-journals"></i> จัดการกลุ่มสาระ</a>

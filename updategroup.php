@@ -1,31 +1,31 @@
 <?php
 include 'conn.php';
 
-    $id = $_POST['department_id'];
-    $course = $_POST['d_name'];
-    // Update user information in the database
-    $sql = "UPDATE department SET department_id=?, d_name=? WHERE id=?";
-    $stmt = mysqli_prepare($conn, $sql);
-    
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ss", $id, $course);
-    
-        if (mysqli_stmt_execute($stmt)) {
-            // Successfully updated user information
-            header("Location: a_group.php");
-            exit;
-        } else {
-            // Error occurred while executing the update query
-            echo "Error: " . mysqli_error($conn);
-        }
-    
-        mysqli_stmt_close($stmt);
+// รับค่า department_id และ d_name จากฟอร์มที่ส่งมาผ่าน POST
+$department_id = $_POST['department_id'];
+$d_name = $_POST['d_name'];
+
+// อัปเดตข้อมูลแผนกในฐานข้อมูล
+$sql = "UPDATE department SET d_name=? WHERE department_id=?";
+$stmt = mysqli_prepare($conn, $sql);
+
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "si", $d_name, $department_id);
+
+    if (mysqli_stmt_execute($stmt)) {
+        // อัปเดตข้อมูลแผนกสำเร็จ
+        header("Location: a_group.php");
+        exit;
     } else {
-        // Error occurred while preparing the SQL statement
+        // เกิดข้อผิดพลาดในระหว่างการอัปเดต
         echo "Error: " . mysqli_error($conn);
     }
-   
-// If the form hasn't been submitted or if there was an error, you can handle it here.
 
-// If the form hasn't been submitted or if there was an error, you can handle it here.
+    mysqli_stmt_close($stmt);
+} else {
+    // เกิดข้อผิดพลาดในการเตรียมคำสั่ง SQL
+    echo "Error: " . mysqli_error($conn);
+}
+
+// หากฟอร์มไม่ได้ถูกส่งหรือมีข้อผิดพลาดเกิดขึ้น
 ?>

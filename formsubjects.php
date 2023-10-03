@@ -22,15 +22,14 @@
         <div class="row">
             <div class="col-sm4">
 
-                <form action="insert_g.php" method="POST" enctype="multipart/form-data">
-                    <label>ลำดับ</label>
-                    <input type="number" name="subject_id" class="form-control" placeholder="ลำดับ" required><br>
+                <form action="insert_s.php" method="POST" enctype="multipart/form-data">
+                    
                     <label>รายวิชา</label>
                     <input type="text" name="s_name" class="form-control" placeholder="ชื่อวิชา" required><br>
                     
                         <center>
                             <input type="submit" value="submit" class="btn btn-success">
-                            <a href="sc_page.php" class="btn btn-danger">Cancel</a>
+                            <a href="a_group.php" class="btn btn-danger">Cancel</a>
                         </center>
                 </form>
             </div>

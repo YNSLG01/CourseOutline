@@ -22,8 +22,7 @@
             <div class="col-sm4">
 
                 <form action="insert_g.php" method="POST" enctype="multipart/form-data">
-                    <label>ลำดับ</label>
-                    <input type="number" name="department_id" class="form-control" placeholder="ลำดับ" required><br>
+                    
                     <label>กลุ่มสาระ</label>
                     <input type="text" name="d_name" class="form-control" placeholder="ชื่อกลุ่มสาระ" required><br>
                     

@@ -31,7 +31,7 @@ $resultSubject = $conn->query($sqlSubject);
     <div class="container" style="width: 40%;">
         <div class="row" align="center"></div>
         <div class="col-sm4">
-            <form action="update.php" method="POST">
+        <form action="update.php" method="POST" enctype="multipart/form-data">
 
                 <label>id</label>
                 <input type="text" name="id" class="form-control" readonly value=<?= $row['id'] ?>><br>
@@ -42,7 +42,7 @@ $resultSubject = $conn->query($sqlSubject);
                 <label>E-mail</label>
                 <input type="email" name="email" class="form-control" value=<?= $row['email'] ?>><br>
                 <label>image</label>
-                <input type="file" name="img" class="form-control" accept="image/*"><br>
+                <input type="file" name="img" class="form-control" accept="image/*" ><br>
                 <label>Tel</label>
                 <input type="number" name="tel" class="form-control" value=<?= $row['tel'] ?>><br>
                 <label>username</label>

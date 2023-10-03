@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $department_id = $_GET['id'];
 
     // Fetch information from the teacher and subject tables based on the department_id
-    $sql = "SELECT teacher.*, subjects.s_name FROM teacher
+    $sql = "SELECT teacher.*, subjects.s_name,teacher.name FROM teacher
             JOIN subjects ON teacher.subject_id = subjects.subject_id
             WHERE teacher.department_id = $department_id";
 
@@ -55,9 +55,7 @@ if (isset($_GET['id'])) {
                 </center>
             </div>
             <div class="button">
-                <!-- <a href=".php" class="btn btn-warning mb-4">แก้ไข</a> -->
-                <a href="formsubject.php" class="btn btn-success mb-4">เพิ่มรายวิชา</a>
-
+              
             </div>
             <div class="container" align="center">
                 <div class="tt">

@@ -29,7 +29,6 @@
 					<div class="card-body">
 						<div class="form-row">
 							<div class="form-group col-md-4">
-
 								<label>รายละเอียดรายวิชา ภาคเรียนที่</label>
 								<select name="semester" id="semester">
 									<option value="" selected></option>
@@ -316,7 +315,7 @@
 							// Add the new options from the response
 							await response.data.forEach(function(coursecode) {
 								coursecodeSelectize.addOption({
-									value: coursecode.coursecode_id,
+									value: coursecode.course_id,
 									text: coursecode.code_id
 								});
 							});
