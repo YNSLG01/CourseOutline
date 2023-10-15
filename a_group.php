@@ -46,7 +46,7 @@
                   <td><?= $row['department_id'] ?></td>
                   <td><?= $row['d_name'] ?></td>
 
-                  <td><a href="editgroup.php?id=<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
+                  <td><a href="api/editgroup.php?<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
                   <td><a href="delgroup.php?id=<?= $row["d_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
                   <td><a href="a_subjects.php?id=<?= $row["department_id"] ?>" class="btn btn-info">รายละเอียด</a></td>
                   <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->

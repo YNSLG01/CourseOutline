@@ -24,10 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($row["usertype_id"] == "1") {
         $_SESSION["username"] = $username;
+        $_SESSION["usertype_id"] =$row["usertype_id"] ;
         header("location: adminhome.php");
     }
     if ($row["usertype_id"] == "2") {
         $_SESSION["username"] = $username;
+        $_SESSION["usertype_id"] = $row["usertype_id"];
         header("location:userhome.php");
     }
     if ($row["usertype_id"] == "3") {

@@ -43,10 +43,16 @@
 									<option value="">เลือกระดับชั้น</option>
 								</select>
 							</div>
-							<div class="form-group col-md-4">
+							<!-- <div class="form-group col-md-4">
 								<label for="department">กลุ่มสาระการเรียนรู้</label>
 								<select name="department_id" id="department">
 									<option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+								</select>
+							</div> -->
+							<div class="form-group col-md-4">
+								<label for="coursecode">รหัสวิชา</label>
+								<select name="coursecode" id="coursecode">
+									<option value="">เลือกรหัสวิชา</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
@@ -55,19 +61,14 @@
 									<option value="">เลือกวิชา</option>
 								</select>
 							</div>
-							<div class="form-group col-md-4">
-								<label for="coursecode">รหัสวิชา</label>
-								<select name="course_id" id="coursecode">
-									<option value="">เลือกรหัสวิชา</option>
-								</select>
-							</div>
-							
+
+
 							<div class="form-group col-md-4" style="display: none;">
 								<label for="status">สถานะ</label>
 								<input type="text" name="status" id="status" value="1">
 							</div>
 							<br>
-							<label>อัปโหลดเอกสาร</label>
+							<!-- <label>อัปโหลดเอกสาร</label> -->
 							<form id="uploadFileCourseSyllabus" method="post" enctype="multipart/form-data">
 								<input type="text" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br>
 								<font color="red">*อัปโหลดได้เฉพาะ .pdf เท่านั้น </font>

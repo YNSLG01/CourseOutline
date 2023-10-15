@@ -1,8 +1,25 @@
 <?php include "conn.php";
+// require_once('api/function_all.php'); 
+
 session_start();
-if (!isset($_SESSION["username"])) {
+
+if (!isset($_SESSION["username"]) && ($_SESSION["usertype_id"] )) {
+    session_destroy();
     header("Location: index.php");
     exit;
+}else{
+    if (file_exists('conn.php') && file_exists('api/function_all.php')) {
+        require_once 'conn.php';
+        require_once 'api/function_all.php';
+    
+        $filename = basename($_SERVER['PHP_SELF']);
+        $flag = checkWebPermission($conn, $filename);
+        if($flag != 1 ){
+            session_destroy();
+            header("Location: no_permisssion.html");
+        }
+        
+    }
 }
 
 // Include your database connection code (connect.php) here
