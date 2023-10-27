@@ -92,7 +92,7 @@
 
 				<center>
 					<h2>ประมวลรายวิชา</h2>
-					<div class="head">
+					<!-- <div class="head">
 						<table>
 							<tr>
 								<td>
@@ -129,7 +129,7 @@
 									</select>
 								</td>
 
-					</div>
+					</div> -->
 					</tr><br>
 					<!-- <td width=30%>
 						<label>ระดับ</label>
@@ -168,6 +168,8 @@
 									<th width=10%>ระดับชั้น</th>
 									<th width=15%>ดาวน์โหลด</th>
 									<th width=15%>สถานะ</th>
+									<th width=10%>หัวหน้ากลุ่มสาระ</th>
+									<th width=10%>ผู้บริหาร</th>
 									<th width=10%>ข้อเสนอแนะ</th>
 									<th width=10%>เอกสารแนบ</th>
 								</tr>
@@ -327,7 +329,7 @@ $result = $stmt->fetchAll();
 foreach ($result as $row) {
 ?>
 	<tr>
-		<td><?= $row['code_id'] ?></td>
+		<td><?= $row['course_id'] ?></td>
 		<td><?= $row['doc_name'] ?></td>		
 		<td><?= $row['date'] ?></td>
 		<td><?= $row['class_id'] ?></td>
@@ -338,11 +340,33 @@ foreach ($result as $row) {
 			if ($row['status'] == 1) {
 				echo '<span class="orange-text">รออนุมัติ</span>';
 			} elseif ($row['status'] == 2) {
-				echo '2'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2
+				echo '2'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2 หัวหน้ากลุ่มอนุมัติ
 			} elseif ($row['status'] == 3) {
-				echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3
+				echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3 ผู้บริหารอนุมัติ
+			} elseif ($row['status'] == 4) {
+				echo '<span class="red-text">ไม่ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ หัวหน้ากลุ่มไม่อนุมัติ
+			} elseif ($row['status'] == 5) {
+				echo '<span class="red-text">ไม่ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
+			} elseif ($row['status'] == 6) {
+				echo 'สถานะไม่ระบุ';
+			}
+			?>
+		</td>
+		<td><?php
+			if ($row['status'] == 2) {
+				echo '<span class="green-text">อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2 หัวหน้ากลุ่มอนุมัติ
 			} elseif ($row['status'] == 4) {
 				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ หัวหน้ากลุ่มไม่อนุมัติ
+			// } elseif ($row['status'] == 5) {
+			// 	echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
+			} elseif ($row['status'] == 6) {
+				echo 'สถานะไม่ระบุ';
+			}
+			?>
+		</td>
+		<td><?php
+			if ($row['status'] == 3) {
+				echo '<span class="green-text">อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3 ผู้บริหารอนุมัติ
 			} elseif ($row['status'] == 5) {
 				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
 			} elseif ($row['status'] == 6) {

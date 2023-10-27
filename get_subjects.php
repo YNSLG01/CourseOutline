@@ -4,7 +4,7 @@ include 'conn.php';
 if (isset($_GET['department_id'])) {
     $departmentId = $_GET['department_id'];
     
-    $sql = "SELECT subject_id, s_name FROM subjects WHERE department_id = $departmentId";
+    $sql = "SELECT subject_id, s_name FROM science WHERE department_id = $departmentId";
     $result = $conn->query($sql);
 
     $subjects = array();

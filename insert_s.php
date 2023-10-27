@@ -9,13 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $course_id = $_POST['course_id'];
     $s_name = $_POST['s_name'];
     $department_id = $_POST['department_id'];
-    $t_name = $_POST['t_name'];
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
 
     // Use prepared statements to prevent SQL injection
-    $stmt = mysqli_prepare($conn, "INSERT INTO science ( class_id, course_id, s_name, department_id, t_name) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = mysqli_prepare($conn, "INSERT INTO science ( class_id, course_id, s_name, department_id, name ,surname) VALUES (?, ?, ?, ?, ?, ?)");
 
     // Bind parameters
-    mysqli_stmt_bind_param($stmt, "sssss",  $class_id, $course_id, $s_name, $department_id, $t_name);
+    mysqli_stmt_bind_param($stmt, "ssssss",  $class_id, $course_id, $s_name, $department_id, $name, $surname);
 
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {

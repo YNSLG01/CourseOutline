@@ -1,13 +1,13 @@
 <?php
 // Include the database connection file
-include('conn.php');
+include 'conn.php';
 
 // Check if the subjects ID is provided in the URL
-if (isset($_GET['id'])) {
-    $subject_id = $_GET['id'];
+if (isset($_GET['subject_id'])) {
+    $subject_id = $_GET['subject_id'];
 
     // Query to fetch subjects details by ID
-    $sql = "SELECT * FROM subjects WHERE subject_id = $subject_id";
+    $sql = "SELECT * FROM science WHERE subject_id = $subject_id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subjects = $_POST['new_subjects_name'];
 
     // Update the subjects in the database
-    $updateSql = "UPDATE subjects SET d_name = '$subjects' WHERE subject_id = $subject_id";
+    $updateSql = "UPDATE science SET d_name = '$subjects' WHERE subject_id = $subject_id";
 
     if (mysqli_query($conn, $updateSql)) {
         header("Location: a_subjects.php"); // Redirect to the subjects management page
         exit();
     } else {
-        echo "Error updating subjects: " . mysqli_error($conn);
+        echo "Error updating science: " . mysqli_error($conn);
     }
 }
 

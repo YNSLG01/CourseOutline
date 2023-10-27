@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include('conn.php');
+include 'conn.php';
 
 // Check if the department ID is provided in the URL
 if (isset($_GET['id'])) {

@@ -6,7 +6,7 @@ include 'conn.php';
 $sqlDepartment = "SELECT department_id, d_name FROM department";
 $resultDepartment = $conn->query($sqlDepartment);
 
-$sqlSubject = "SELECT subject_id, s_name FROM subjects";
+$sqlSubject = "SELECT subject_id, s_name FROM science";
 $resultSubject = $conn->query($sqlSubject);
 ?>
 

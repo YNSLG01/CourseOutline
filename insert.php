@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Use prepared statements to prevent SQL injection
     if ($usertype_id == 2) {
         // If usertype_id is 2, insert into the teacher table
-        $stmt = mysqli_prepare($conn, "INSERT INTO teacher (name, lastname, subject_id, department_id) VALUES ( ?, ?, ?, ?)");
+        $stmt = mysqli_prepare($conn, "INSERT INTO science (name, surname, subject_id, department_id) VALUES ( ?, ?, ?, ?)");
     } else {
         // If usertype_id is not 2, insert into the user table
         $stmt = mysqli_prepare($conn, "INSERT INTO user (name, surname, email, tel, img, username, password, usertype_id, department_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Bind parameters
     if ($usertype_id == 2) {
         // If usertype_id is 2, insert into both teacher and user tables
-        $stmt_teacher = mysqli_prepare($conn, "INSERT INTO teacher (name, lastname, department_id, subject_id) VALUES (?, ?, ?, ?)");
+        $stmt_teacher = mysqli_prepare($conn, "INSERT INTO science (name, surname, department_id, subject_id) VALUES (?, ?, ?, ?)");
 
         // Bind parameters for teacher table
         mysqli_stmt_bind_param($stmt_teacher, "ssis", $name, $surname, $department_id, $subject_id);

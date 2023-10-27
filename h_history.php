@@ -50,13 +50,14 @@
         /* Add a grey background color to the table header and on hover */
         background-color: #d9d9d9;
     }
+
     .green-text {
         color: green;
     }
+
     .red-text {
         color: red;
     }
-
 </style>
 
 <body>
@@ -67,7 +68,7 @@
                 <h2>ประวัติการอนุมัติ</h2><br>
                 <table id="myTable">
 
-                    <tr>
+                    <!-- <tr>
                         <td width=40%>
                             <label>รายละเอียดรายวิชา ภาคเรียนที่</label>
                             <select name="term" id="term" onchange="Tsubmit();">
@@ -103,37 +104,38 @@
                                 <?php } ?>
                             </select>
                         </td>
-                    </tr>
+                    </tr> -->
 
                 </table>
 
                 <table id="myTable">
-                        <tr class="header">
-                            <th width="15%">รหัสวิชา</th>
-                            <th width="20%">ชื่อวิชา</th>
-                            <th width="20%">วัน/เดือน/ปี</th>
-                            <th width="10%">ระดับชั้น</th>
-                            <th width="15%">รายละเอียด</th>
-                            <th width="10%">สถานะ</th>
-                            
-                        </tr>
-                        <?php
-                        // Include the database connection
-                        require_once 'connect.php';
+                    <tr class="header">
+                        <th width="10%">รหัสวิชา</th>
+                        <th width="20%">ชื่อวิชา</th>
+                        <th width="10%">วัน/เดือน/ปี</th>
+                        <th width="10%">ระดับชั้น</th>
+                        <th width="10%">รายละเอียด</th>
+                        <th width="10%">สถานะ</th>
+                        <th width="10%">ผู้บริหาร</th>
 
-                        // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
+                    </tr>
+                    <?php
+                    // Include the database connection
+                    require_once 'connect.php';
+
+                    // Prepare and execute the SQL query
+                    $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
                         LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
                         LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
 
-                        // Loop through the results and display rows with status 1
-                        foreach ($result as $row) {
-                            if ($row['status'] == 2 || $row['status'] == 4) {
-                        ?>
-                                <tr>
-                                <td><?= $row['code_id'] ?></td>
+                    // Loop through the results and display rows with status 1
+                    foreach ($result as $row) {
+                        if ($row['status'] == 2 || $row['status'] == 4 || $row['status'] == 3 || $row['status'] == 5) {
+                    ?>
+                            <tr>
+                                <td><?= $row['course_id'] ?></td>
                                 <td><?= $row['doc_name'] ?></td>
                                 <td><?= $row['date'] ?></td>
                                 <td><?= $row['class_id'] ?></td>
@@ -147,12 +149,21 @@
                                         echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
+                                <td><?php
+                                    if ($row['status'] == 3) {
+                                        echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3 ผู้บริหารอนุมัติ
+                                    } elseif ($row['status'] == 5) {
+                                        echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
+                                    } else {
+                                        echo "<?= $row[class_id] ?>";
+                                    }
+                                    ?></td>
                             </tr>
-                        <?php
-                            }
+                    <?php
                         }
-                        ?>
-                    </table>
+                    }
+                    ?>
+                </table>
             </center>
         </div>
     </div>

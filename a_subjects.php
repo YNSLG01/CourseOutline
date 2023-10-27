@@ -69,11 +69,11 @@ if (isset($_GET['id'])) {
 
             ?>
               <tr>
-                <td><?= $row['id'] ?></td>
+                <td><?= $row['subject_id'] ?></td>
                 <td><?= $row['course_id'] ?></td>
                 <td><?= $row['s_name'] ?></td>
-                <td><?= $row['t_name'] ?></td>
-                <td><a href="api/editsubjects.php?<?= $row["id"] ?>" class="btn btn-warning">แก้ไข</a></td>
+                <td><?= $row['name'],$row['surname'] ?></td>
+                <td><a href="api/editsubjects.php?<?= $row["subject_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
                 <td><a href="delsubjects.php?id=<?= $row["s_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
 
                 <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->
@@ -120,13 +120,13 @@ if (isset($_GET['id'])) {
         $('#addSubject').click(function () {
             // Get the 'id' parameter from the current URL
             var urlParams = new URLSearchParams(window.location.search);
-            var id = urlParams.get('id');
+            var subject_id = urlParams.get('subject_id');
             
             // Construct the URL with the 'id' parameter
             var redirectUrl = 'formsubjects.php';
 
-            if (id !== null) {
-                redirectUrl += '?group=' + id;
+            if (subject_id !== null) {
+                redirectUrl += '?group=' + subject_id;
             }
 
             // Redirect to the desired page with the 'id' parameter

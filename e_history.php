@@ -68,7 +68,7 @@
                 <h2>ประวัติการอนุมัติ</h2><br>
                 <table id="myTable">
 
-                    <tr>
+                    <!-- <tr>
                         <td width=40%>
                             <label>รายละเอียดรายวิชา ภาคเรียนที่</label>
                             <select name="term" id="term" onchange="Tsubmit();">
@@ -104,13 +104,13 @@
                                 <?php } ?>
                             </select>
                         </td>
-                    </tr>
+                    </tr> -->
 
                 </table>
 
                 <table id="myTable">
                     <tr class="header">
-                        <th width="15%">รหัสวิชา</th>
+                        <th width="10%">รหัสวิชา</th>
                         <th width="20%">ชื่อวิชา</th>
                         <th width="20%">วัน/เดือน/ปี</th>
                         <th width="10%">ระดับชั้น</th>
@@ -134,7 +134,7 @@
                         if ($row['status'] == 3 || $row['status'] == 5) {
                     ?>
                             <tr>
-                                <td><?= $row['code_id'] ?></td>
+                                <td><?= $row['course_id'] ?></td>
                                 <td><?= $row['doc_name'] ?></td>
                                 <td><?= $row['date'] ?></td>
                                 <td><?= $row['class_id'] ?></td>

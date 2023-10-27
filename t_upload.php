@@ -38,22 +38,20 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label>ระดับชั้น</label>
-								<select name="class" id="class">
+								<select name="class_id" id="class">
 									<option value="" selected></option>
 									<option value="">เลือกระดับชั้น</option>
 								</select>
 							</div>
-							<!-- <div class="form-group col-md-4">
+							<div class="form-group col-md-4">
 								<label for="department">กลุ่มสาระการเรียนรู้</label>
 								<select name="department_id" id="department">
 									<option value="">เลือกกลุ่มสาระการเรียนรู้</option>
 								</select>
-							</div> -->
+							</div>
 							<div class="form-group col-md-4">
-								<label for="coursecode">รหัสวิชา</label>
-								<select name="coursecode" id="coursecode">
-									<option value="">เลือกรหัสวิชา</option>
-								</select>
+								<label for="course_id">รหัสวิชา</label>
+								<input type="text" name="course_id" id="course_id" required class="form-control" placeholder="รหัสวิชา">
 							</div>
 							<div class="form-group col-md-4">
 								<label for="subjects">วิชา</label>
@@ -381,6 +379,8 @@
 
 			// Add department_id and status to the FormData object
 			formData.append('department_id', $('#department').val());
+			formData.append('course_id', $('#course_id').val());
+			formData.append('class_id', $('#class_id').val());
 			formData.append('status', $('#status').val());
 
 			$.ajax({
@@ -419,6 +419,8 @@
 								doc_name: formData.get('doc_name'), // Get the document name from the form
 								doc_file: jsonResponse.savedFileName, // Get the saved file name from the response
 								department_id: formData.get('department_id'), // Get department_id from the form
+								course_id: formData.get('course_id'),
+								class_id: formData.get('class_id'),
 								status: formData.get('status') // Get status from the form
 
 								// Add other data as needed

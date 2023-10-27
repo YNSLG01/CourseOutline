@@ -56,7 +56,8 @@
                         </select>
                     </div><br>
                     <label>ชื่ออาจารย์</label>
-                    <input type="text" name="t_name" class="form-control" placeholder="ชื่ออาจารย์" required><br>
+                    <input type="text" name="name" class="form-control" placeholder="ชื่อ" required><br>
+                    <input type="text" name="surname" class="form-control" placeholder="นามสกุล" required><br>
 
                     <center>
                         <input type="submit" value="Add" class="btn btn-success">
