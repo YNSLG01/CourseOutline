@@ -123,9 +123,9 @@
                     require_once 'connect.php';
 
                     // Prepare and execute the SQL query
-                    $stmt = $conn->prepare("SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
-                        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
-                        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id");
+                    $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
+                    LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+                    LEFT JOIN department ON tbl_pdf.department_id = department.department_id");
                     $stmt->execute();
                     $result = $stmt->fetchAll();
 

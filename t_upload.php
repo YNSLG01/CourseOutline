@@ -29,15 +29,15 @@
 					<div class="card-body">
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label>รายละเอียดรายวิชา ภาคเรียนที่</label>
-								<select name="semester" id="semester">
+								<label for="semester">รายละเอียดรายวิชา ภาคเรียนที่</label>
+								<select name="semester_id" id="semester">
 									<option value="" selected></option>
 									<option value="">เลือกภาคเรียน</option>
 								</select>
 
 							</div>
 							<div class="form-group col-md-4">
-								<label>ระดับชั้น</label>
+								<label for="class">ระดับชั้น</label>
 								<select name="class_id" id="class">
 									<option value="" selected></option>
 									<option value="">เลือกระดับชั้น</option>
@@ -266,106 +266,6 @@
 		});
 	});
 </script>
-<script>
-	$(document).ready(function() {
-		// Fetch data from the API
-		$.ajax({
-			url: 'api/select_coursecode.php',
-			type: 'GET',
-			dataType: 'json',
-			success: function(response) {
-				if (response.code === 1) {
-					// Populate the select dropdown with data from the API
-					var select = $('#coursecode').selectize()[0].selectize;
-					$.each(response.data, function(index, item) {
-						select.addOption({
-							value: item.course_id,
-							text: item.code_id
-						});
-					});
-				} else {
-					console.error(response.message);
-				}
-			},
-			error: function(error) {
-				console.error("Error fetching data:", error);
-			}
-		});
-		$('#subjects').selectize({
-			onChange: function(value) {
-				// Handle the change event here
-				console.log('Selected value:', value);
-
-				$.ajax({
-					url: 'api/select_coursecode_by_subject_id.php?subject_id=' + value,
-					type: 'GET',
-					dataType: 'json',
-					success: async function(response) {
-						console.log(response)
-
-						if (response.code === 1) {
-
-							// Get Selectize instance for the "coursecode" dropdown
-							var coursecodeSelectize = $('#coursecode')[0].selectize;
-
-							// Clear all existing options
-							await coursecodeSelectize.clearOptions();
-
-							// Add the new options from the response
-							await response.data.forEach(function(coursecode) {
-								coursecodeSelectize.addOption({
-									value: coursecode.course_id,
-									text: coursecode.code_id
-								});
-							});
-
-							// Set the new options as selected
-							await coursecodeSelectize.setValue('');
-
-							// Populate the select dropdown with data from the API
-							// var select = $('#coursecode').selectize()[0].selectize;
-							// $.each(response.data, function(index, item) {
-							// 	select.addOption({
-							// 		value: item.subject_id,
-							// 		text: item.s_name
-							// 	});
-							// });
-						} else {
-							console.error(response.message);
-						}
-					},
-					error: function(error) {
-						console.error("Error fetching data:", error);
-					}
-				});
-
-				// You can perform additional actions based on the selected value
-			}
-		});
-		// Initialize Selectize on the #coursecode element
-		var coursecodeSelectize = $('#coursecode').selectize({
-			// Your Selectize options, if any
-		})[0].selectize;
-
-		// Attach the onChange event after initialization
-		coursecodeSelectize.on('change', function(value) {
-			// Handle the change event here
-			console.log('Selected value:', value);
-
-			// Get the text of the selected option
-			// var selectedOption = coursecodeSelectize.options[value];
-			// var selectedTextDocName = selectedOption ? selectedOption.text : '';
-
-			// console.log('Selected text:', selectedTextDocName);
-			// $('#doc_name').val(selectedTextDocName)
-
-
-			// Add your additional code here
-			// For example, you can make an AJAX request or perform any other action
-		});
-	});
-</script>
-
 
 
 
@@ -381,6 +281,7 @@
 			formData.append('department_id', $('#department').val());
 			formData.append('course_id', $('#course_id').val());
 			formData.append('class_id', $('#class_id').val());
+			formData.append('semester_id', $('#semester_id').val());
 			formData.append('status', $('#status').val());
 
 			$.ajax({
@@ -421,6 +322,7 @@
 								department_id: formData.get('department_id'), // Get department_id from the form
 								course_id: formData.get('course_id'),
 								class_id: formData.get('class_id'),
+								semester_id: formData.get('semester_id'),
 								status: formData.get('status') // Get status from the form
 
 								// Add other data as needed

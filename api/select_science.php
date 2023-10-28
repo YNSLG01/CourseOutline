@@ -6,15 +6,15 @@ if (file_exists('../conn.php')) {
     require_once '../conn.php';
     $res['code'] = 1;
 
-    // Check if course_id is set and is an integer
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $id = intval($_GET['id']);
+    // Check if department_id is set and is an integer
+    if (isset($_GET['subject_id']) && is_numeric($_GET['subject_id'])) {
+        $subject_id = intval($_GET['subject_id']);
         // Prepare the SQL statement with WHERE clause
-        $stmt = $conn->prepare("SELECT `id`, `course_id`, FROM `satit`.`science` WHERE `id` = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = $conn->prepare("SELECT `subject_id`, `course_id` FROM `satit`.`science` WHERE `subject_id` = ?");
+        $stmt->bind_param("i", $subject_id);
     } else {
         // Prepare the SQL statement without WHERE clause
-        $stmt = $conn->prepare("SELECT `id`, `course_id`, FROM `satit`.`science`");
+        $stmt = $conn->prepare("SELECT `subject_id`, `course_id` FROM `satit`.`science`");
     }
 
     // Execute the SQL statement

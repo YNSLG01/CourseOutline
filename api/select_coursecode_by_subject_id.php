@@ -8,13 +8,13 @@ if (file_exists('../conn.php')) {
 
     // Check if subject_id is set and is an integer
     if (isset($_GET['course_id']) && is_numeric($_GET['course_id'])) {
-        $subject_id = intval($_GET['course_id']);
+        $course_id = intval($_GET['course_id']);
         // Prepare the SQL statement with WHERE clause
-        $stmt = $conn->prepare("SELECT `course_id`, `name` FROM `satit`.`science` WHERE `subject_id` = ?");
-        $stmt->bind_param("i", $subject_id);
+        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`science` WHERE `course_id` = ?");
+        $stmt->bind_param("i", $course_id);
     } else {
         // Prepare the SQL statement without WHERE clause
-        $stmt = $conn->prepare("SELECT `course_id`, `name` FROM `satit`.`science`");
+        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`science`");
     }
 
     // Execute the SQL statement

@@ -10,11 +10,11 @@ if (file_exists('../conn.php')) {
     if (isset($_GET['department_id']) && is_numeric($_GET['department_id'])) {
         $department_id = intval($_GET['department_id']);
         // Prepare the SQL statement with WHERE clause
-        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`subjects` WHERE `department_id` = ?");
+        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`science` WHERE `department_id` = ?");
         $stmt->bind_param("i", $department_id);
     } else {
         // Prepare the SQL statement without WHERE clause
-        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`subjects`");
+        $stmt = $conn->prepare("SELECT `subject_id`, `s_name` FROM `satit`.`science`");
     }
 
     // Execute the SQL statement

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/a_approve.css?">
+  <link rel="stylesheet" href="css/a_approve.css">
   <title>ประวัติการอนุมัติ</title>
 </head>
 
@@ -51,9 +51,9 @@
                 <th>สถานะ</th>
               </tr>
               <?php
-              $sql = "SELECT tbl_pdf.* , subjects.s_name, coursecode.code_id FROM `tbl_pdf`
-        LEFT JOIN subjects ON tbl_pdf.subject_id = subjects.subject_id
-        LEFT JOIN coursecode ON tbl_pdf.course_id = coursecode.course_id";
+              $sql = "SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
+              LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+              LEFT JOIN department ON tbl_pdf.department_id = department.department_id";
 
               // $sql = "SELECT * FROM tbl_pdf";
               $result = mysqli_query($conn, $sql);
@@ -72,7 +72,7 @@
                       if ($row['status'] == 1) {
                         echo '<span class="orange-text">รออนุมัติ</span>';
                       } elseif ($row['status'] == 2) {
-                        echo '2'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2
+                        echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2
                       } elseif ($row['status'] == 3) {
                         echo '<span class="green-text">ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 3
                       } elseif ($row['status'] == 4) {
