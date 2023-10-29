@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Move the uploaded file to the upload directory
             if (move_uploaded_file($_FILES['doc_file']['tmp_name'], $upload_path)) {
                 // Insert the file information into the database
-                $stmt = $conn->prepare("INSERT INTO tbl_pdf (doc_name, doc_file, class_id,semester_id, department_id, course_id, status) VALUES (?,?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO tbl_pdf (doc_name, doc_file,semester_id, class_id, department_id, course_id, status) VALUES (?,?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("sssssss", $doc_name, $new_filename,$semester_id, $class_id, $department_id, $course_id, $status);
 
                 if ($stmt->execute()) {

@@ -29,19 +29,12 @@
 					<div class="card-body">
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label for="semester">รายละเอียดรายวิชา ภาคเรียนที่</label>
-								<select name="semester_id" id="semester">
-									<option value="" selected></option>
-									<option value="">เลือกภาคเรียน</option>
-								</select>
-
+								<label for="semester_id">รายละเอียดรายวิชา ภาคเรียนที่</label>
+								<input type="text" name="semester_id" id="semester_id" required class="form-control" placeholder="ภาคเรียน/ปีการศึกษา">
 							</div>
 							<div class="form-group col-md-4">
-								<label for="class">ระดับชั้น</label>
-								<select name="class_id" id="class">
-									<option value="" selected></option>
-									<option value="">เลือกระดับชั้น</option>
-								</select>
+								<label for="class_id">ระดับชั้น</label>
+								<input type="text" name="class_id" id="class_id" required class="form-control" placeholder="ระดับชั้น">
 							</div>
 							<div class="form-group col-md-4">
 								<label for="department">กลุ่มสาระการเรียนรู้</label>
@@ -68,7 +61,7 @@
 							<br>
 							<!-- <label>อัปโหลดเอกสาร</label> -->
 							<form id="uploadFileCourseSyllabus" method="post" enctype="multipart/form-data">
-								<input type="text" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา"> <br>
+								<input type="text" style="display: none;" name="doc_name" id="doc_name" required class="form-control" placeholder="ชื่อวิชา">
 								<font color="red">*อัปโหลดได้เฉพาะ .pdf เท่านั้น </font>
 								<input type="file" name="doc_file" required class="form-control" accept="application/pdf"> <br>
 								<button type="submit" class="btn btn-primary">Upload</button>
@@ -85,7 +78,7 @@
 	</div>
 
 </body>
-ิ<script>
+<!-- ิ<script>
 	$(document).ready(function() {
 		// Fetch data from the API
 		$.ajax({
@@ -111,8 +104,8 @@
 			}
 		});
 	});
-</script>
-<script>
+</script> -->
+<!-- <script>
 	$(document).ready(function() {
 		// Fetch data from the API
 		$.ajax({
@@ -138,7 +131,7 @@
 			}
 		});
 	});
-</script>
+</script> -->
 <script>
 	$(document).ready(function() {
 		// Fetch data from the API

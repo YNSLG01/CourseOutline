@@ -50,8 +50,14 @@
         /* Add a grey background color to the table header and on hover */
         background-color: #d9d9d9;
     }
+
     .green-text {
         color: green;
+    }
+    
+
+    .red-text {
+        color: red;
     }
 </style>
 
@@ -102,7 +108,7 @@
                     </tr> -->
 
                 </table>
-                
+
                 <table id="myTable">
                     <tr class="header">
                         <th width="15%">รหัสวิชา</th>
@@ -114,40 +120,42 @@
 
                     </tr>
                     <?php
-                        // Include the database connection
-                        require_once 'connect.php';
+                    // Include the database connection
+                    require_once 'connect.php';
 
-                        // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
+                    // Prepare and execute the SQL query
+                    $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
                         LEFT JOIN science ON tbl_pdf.course_id = science.course_id
                         LEFT JOIN department ON tbl_pdf.department_id = department.department_id");
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
 
-                        // Loop through the results and display rows with status 1
-                        foreach ($result as $row) {
-                            if ($row['status'] == 2 || $row['status'] == 3 ) {
-                        ?>
-                                <tr>
-                                    <td><?= $row['course_id'] ?></td>
-                                    <td><?= $row['doc_name'] ?></td>
-                                    <td><?= $row['date'] ?></td>
-                                    <td><?= $row['class_id'] ?></td>
-                                    <td><a href="/dowloads<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
-                                    <!-- <td><a href="h_history.php">ดาวน์โหลด</a></td> -->
-                                    <td><?php 
+                    // Loop through the results and display rows with status 1
+                    foreach ($result as $row) {
+                        if ($row['status'] == 3 || $row['status'] == 5) {
+                    ?>
+                            <tr>
+                                <td><?= $row['course_id'] ?></td>
+                                <td><?= $row['doc_name'] ?></td>
+                                <td><?= $row['date'] ?></td>
+                                <td><?= $row['class_id'] ?></td>
+                                <td><a href="/dowloads<?php echo $row['doc_file']; ?>" target="_blank">ดาวน์โหลด</a></td>
+                                <!-- <td><a href="h_history.php">ดาวน์โหลด</a></td> -->
+                                <td><?php
                                     if ($row['status'] == 3) {
                                         echo '<span class="green-text">อนุมัติแล้ว</span>';
-                                    }else{
+                                    } elseif ($row['status'] == 5) {
+                                        echo '<span class="red-text">ไม่ผ่านการอนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
+                                    } else {
                                         echo "<?= $row[class_id] ?>";
                                     }
                                     ?></td>
-                                    
-                                </tr>
-                        <?php
-                            }
+
+                            </tr>
+                    <?php
                         }
-                        ?>
+                    }
+                    ?>
                 </table>
             </center>
         </div>
