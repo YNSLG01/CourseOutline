@@ -64,12 +64,12 @@ mysqli_close($conn);
     <center>
         <div class="container" >
             <br><br>
-            <h2>แก้ไขกลุ่มสาระ</h2><br><br>
+            <h2>แก้ไขวิชา</h2><br><br>
             <form method="POST">
                 <div class="form-group">
                 <label>ลำดับ</labelfor=>
                     <input type="text" name="subject_id" class="form-control" readonly value = "<?= $row['subject_id'] ?>" required>
-                    <label for="new_subjects_name">กลุ่มสาระ</labelfor=>
+                    <label for="new_subjects_name">วิชา</labelfor=>
                     <input type="text" name="new_subjects_name" class="form-control" value="<?= $row['s_name'] ?>" required>
                 </div>
                 <br><br>
