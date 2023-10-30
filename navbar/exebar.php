@@ -44,7 +44,7 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
         <a href="e_profile.php"></i><i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว</a>
         <a href="e_approve.php"></i><i class="bi bi-check2-square"></i> การอนุมัติ</a>
         <a href="e_history.php"></i><i class="bi bi-journals"></i> ประวัติการอนุมัติ</a>
-        <a href="e_notify.php"></i><i class="bi bi-bell"></i> การแจ้งเตือน</a>
+        <!-- <a href="e_notify.php"></i><i class="bi bi-bell"></i> การแจ้งเตือน</a> -->
         <div class="menu">
             <a align="center" href="logout.php"><i class="bi bi-box-arrow-left"></i> logout</a>
         </div>

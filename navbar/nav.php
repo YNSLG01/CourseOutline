@@ -55,7 +55,7 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
         <a href="a_approve.php"></i><i class="bi bi-check2-square"></i> ประวัติการอนุมัติ</a>
         <a href="a_user.php"></i><i class="bi bi-people"></i> จัดการผู้ใช้งาน</a>
         <a href="a_group.php"></i><i class="bi bi-journals"></i> จัดการกลุ่มสาระ</a>
-        <a href="a_notify.php"></i><i class="bi bi-calendar-event"></i> กำหนดการส่ง</a>
+        <!-- <a href="a_notify.php"></i><i class="bi bi-calendar-event"></i> กำหนดการส่ง</a> -->
         <div class="menu">
             <a align="center" href="logout.php"><i class="bi bi-box-arrow-left"></i> ออกจากระบบ</a>
         </div>

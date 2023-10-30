@@ -45,7 +45,7 @@ if ($nameResult && mysqli_num_rows($nameResult) > 0) {
         <a href="t_course.php"></i><i class="bi bi-journals"></i> ประมวลรายวิชา</a>
         <a href="t_upload.php"></i><i class="bi bi-file-earmark-arrow-up"></i> อัปโหลดประมวลรายวิชา</a>
         <a href="t_approve.php"></i><i class="bi bi-check2-square"></i> ประวัติการอนุมัติ</a>
-        <a href="t_notify.php"></i><i class="bi bi-bell"></i> การแจ้งเตือน</a>
+        <!-- <a href="t_notify.php"></i><i class="bi bi-bell"></i> การแจ้งเตือน</a> -->
         <div class="menu">
             <a align="center" href="logout.php"><i class="bi bi-box-arrow-left"></i> logout</a>
         </div>
