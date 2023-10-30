@@ -37,16 +37,17 @@
                 <th style="width: 11%;"> รายละเอียด</th>
               </tr>
               <?php
-            $sql = "SELECT * FROM department";
-            $result = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_array($result)) {
-
+              $i = 0;
+              $sql = "SELECT * FROM department";
+              $result = mysqli_query($conn, $sql);
+              while ($row = mysqli_fetch_array($result)) {
+                $i++;
               ?>
                 <tr>
-                  <td><?= $row['department_id'] ?></td>
+                  <td><?= $i ?></td>
                   <td><?= $row['d_name'] ?></td>
 
-                  <td><a href="api/editgroup.php?<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
+                  <td><a href="api/editgroup.php?id=<?= $row["department_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
                   <td><a href="delgroup.php?id=<?= $row["d_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
                   <td><a href="a_subjects.php?id=<?= $row["department_id"] ?>" class="btn btn-info">รายละเอียด</a></td>
                   <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->
@@ -64,18 +65,18 @@
       </div>
   </body>
   <style>
-    .tt{
+    .tt {
       width: 90%;
       margin-left: 190px;
       font-size: 16px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-      
-      .button {
-          margin-left: -800px;
-      }
-  
+    }
+
+    .button {
+      margin-left: -800px;
+    }
   </style>
+
   </html>
 
   <script language="JavaScript">

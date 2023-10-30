@@ -111,7 +111,7 @@
                 <table id="myTable">
                     <tr class="header">
                         <th width="10%">รหัสวิชา</th>
-                        <th width="20%">ชื่อวิชา</th>
+                        <th width="30%">ชื่อวิชา</th>
                         <th width="20%">วัน/เดือน/ปี</th>
                         <th width="10%">ระดับชั้น</th>
                         <th width="15%">รายละเอียด</th>
@@ -123,8 +123,8 @@
                     require_once 'connect.php';
 
                     // Prepare and execute the SQL query
-                    $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
-                    LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+                    $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name,science.course_id, department.department_id FROM `tbl_pdf`
+                    LEFT JOIN science ON tbl_pdf.course_id = science.subject_id
                     LEFT JOIN department ON tbl_pdf.department_id = department.department_id");
                     $stmt->execute();
                     $result = $stmt->fetchAll();

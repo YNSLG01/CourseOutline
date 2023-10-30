@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include('conn.php');
+include('../conn.php');
 
 // Check if the department ID is provided in the URL
 if (isset($_GET['id'])) {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateSql = "UPDATE department SET d_name = '$newDepartmentName' WHERE department_id = $department_id";
 
     if (mysqli_query($conn, $updateSql)) {
-        header("Location: a_group.php"); // Redirect to the department management page
+        header("Location: ../a_group.php"); // Redirect to the department management page
         exit();
     } else {
         echo "Error updating department: " . mysqli_error($conn);
@@ -57,7 +57,10 @@ mysqli_close($conn);
 <style>
     .form-group {
 
-        width: 50%;
+        width: 100%;
+    }
+    .container{
+        width: 100%;
     }
 </style>
 <body>
@@ -70,7 +73,7 @@ mysqli_close($conn);
                 <label>ลำดับ</labelfor=>
                     <input type="text" name="department_id" class="form-control" readonly value = "<?= $row['department_id'] ?>" required>
                     <label for="new_department_name">กลุ่มสาระ</labelfor=>
-                    <input type="text" name="new_department_name" class="form-control" value="<?= $row['d_name'] ?>" required>
+                    <input style="width: 100%;" type="text" name="new_department_name" class="form-control" value="<?= $row['d_name'] ?>" required>
                 </div>
                 <br><br>
                 <input type="submit" value="submit" class="btn btn-success">

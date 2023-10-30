@@ -163,11 +163,10 @@
 							<table id="myTable">
 								<tr class="header">
 									<th width=10%>รหัสวิชา</th>
-									<th width=15%>ชื่อวิชา</th>
-									<th width=15%>วันเดือนปี</th>
+									<th width=20%>ชื่อวิชา</th>
+									<th width=10%>วันเดือนปี</th>
 									<th width=10%>ระดับชั้น</th>
-									<th width=15%>ดาวน์โหลด</th>
-									<th width=15%>สถานะ</th>
+									<th width=5%>ดาวน์โหลด</th>
 									<th width=10%>หัวหน้ากลุ่มสาระ</th>
 									<th width=10%>ผู้บริหาร</th>
 									<th width=10%>ข้อเสนอแนะ</th>
@@ -321,11 +320,12 @@
 <?php
 //คิวรี่ข้อมูลมาแสดงในตาราง
 require_once 'connect.php';
-$stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
-LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+$stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name,science.course_id, department.department_id FROM `tbl_pdf`
+LEFT JOIN science ON tbl_pdf.course_id = science.subject_id
 LEFT JOIN department ON tbl_pdf.department_id = department.department_id");
 $stmt->execute();
 $result = $stmt->fetchAll();
+// print_r($result);
 foreach ($result as $row) {
 ?>
 	<tr>
@@ -336,7 +336,7 @@ foreach ($result as $row) {
 		<td><a href="downloads/<?php echo $row['doc_file']; ?>" target="_blank"><i class="fa fa-download fa-lg"></i></td>
 
 
-		<td><?php
+		<!-- <td><?php
 			if ($row['status'] == 1) {
 				echo '<span class="orange-text">รออนุมัติ</span>';
 			} elseif ($row['status'] == 2) {
@@ -351,16 +351,16 @@ foreach ($result as $row) {
 				echo 'สถานะไม่ระบุ';
 			}
 			?>
-		</td>
+		</td> -->
 		<td><?php
-			if ($row['status'] == 2) {
+			if ($row['status'] >= 2 && $row['status'] != 4) {
 				echo '<span class="green-text">อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ status เป็น 2 หัวหน้ากลุ่มอนุมัติ
 			} elseif ($row['status'] == 4) {
 				echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ หัวหน้ากลุ่มไม่อนุมัติ
 			// } elseif ($row['status'] == 5) {
 			// 	echo '<span class="red-text">ไม่อนุมัติ</span>'; // เพิ่มเงื่อนไขเมื่อ ผู้บริหารไม่อนุมัติ
-			} elseif ($row['status'] == 6) {
-				echo 'สถานะไม่ระบุ';
+			// } elseif ($row['status'] == 6) {
+			// 	echo 'สถานะไม่ระบุ';
 			}
 			?>
 		</td>

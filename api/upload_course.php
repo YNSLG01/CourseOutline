@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $class_id =$_POST['class_id'];
         $semester_id =$_POST['semester_id'];
         $status = $_POST['status'];
-
+        // $res['code'] = 1;
+        // $res['message'] = "อัปโหลดไฟล์สำเร็จ->".$course_id;
         // Ensure the file is a PDF
         $file_extension = strtolower(pathinfo($_FILES['doc_file']['name'], PATHINFO_EXTENSION));
 
@@ -47,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Invalid file type
             $res['message'] = "รูปแบบไฟล์ไม่ถูกต้อง (ต้องเป็น PDF เท่านั้น)";
         }
+
     } else {
         // No file uploaded or an error occurred
         $res['message'] = "กรุณาเลือกไฟล์เพื่ออัปโหลด";

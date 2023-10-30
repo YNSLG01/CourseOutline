@@ -115,21 +115,22 @@
                         <?php
                         // Include the database connection
                         require_once 'connect.php';
-
+                        $i = 0;
                         // Prepare and execute the SQL query
-                        $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
-                        LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+                        $stmt = $conn->prepare("SELECT tbl_pdf.* , science.s_name,science.course_id, department.department_id FROM `tbl_pdf`
+                        LEFT JOIN science ON tbl_pdf.course_id = science.subject_id
                         LEFT JOIN department ON tbl_pdf.department_id = department.department_id");
-                        
+
                         $stmt->execute();
                         $result = $stmt->fetchAll();
 
                         // Loop through the results and display rows with status 1
                         foreach ($result as $row) {
                             if ($row['status'] == 1) {
+                                $i++;
                         ?>
                                 <tr>
-                                    <td><?= $row['tbl_id'] ?></td>
+                                    <td><?= $i ?></td>
                                     <td><?= $row['course_id'] ?></td>
                                     <td><?= $row['doc_name'] ?></td>
                                     <td><?= $row['date'] ?></td>

@@ -43,8 +43,11 @@
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label for="course_id">รหัสวิชา</label>
-								<input type="text" name="course_id" id="course_id" required class="form-control" placeholder="รหัสวิชา">
+								<label for="course">รหัสวิชา</label>
+								<select name="course_id" id="course">
+									<option value="">เลือกรหัสวิชา</option>
+								</select>
+								<!-- <input type="text" name="course_id" id="course_id" required class="form-control" placeholder="รหัสวิชา"> -->
 							</div>
 							<div class="form-group col-md-4">
 								<label for="subjects">วิชา</label>
@@ -163,7 +166,34 @@
 	$(document).ready(function() {
 		// Fetch data from the API
 		$.ajax({
-			url: 'api/select_subjects.php',
+			url: 'api/select_department.php',
+			type: 'GET',
+			dataType: 'json',
+			success: function(response) {
+				if (response.code === 1) {
+					// Populate the select dropdown with data from the API
+					var select = $('#department').selectize()[0].selectize;
+					$.each(response.data, function(index, item) {
+						select.addOption({
+							value: item.department_id,
+							text: item.d_name
+						});
+					});
+				} else {
+					console.error(response.message);
+				}
+			},
+			error: function(error) {
+				console.error("Error fetching data:", error);
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		// Fetch data from the API
+		$.ajax({
+			url: 'api/select_science.php',
 			type: 'GET',
 			dataType: 'json',
 			success: function(response) {
@@ -260,6 +290,107 @@
 	});
 </script>
 
+<script>
+	$(document).ready(function() {
+		// Fetch data from the API
+		$.ajax({
+			url: 'api/select_science.php',
+			type: 'GET',
+			dataType: 'json',
+			success: function(response) {
+				if (response.code === 1) {
+					// Populate the select dropdown with data from the API
+					var select = $('#course').selectize()[0].selectize;
+					$.each(response.data, function(index, item) {
+						select.addOption({
+							value: item.subject_id,
+							text: item.course_id
+						});
+					});
+				} else {
+					console.error(response.message);
+				}
+			},
+			error: function(error) {
+				console.error("Error fetching data:", error);
+			}
+		});
+
+		$('#department').selectize({
+			onChange: function(value) {
+				// Handle the change event here
+				console.log('Selected value:', value);
+
+				$.ajax({
+					url: 'api/select_coursecode_by_subject_id.php?department_id=' + value,
+					type: 'GET',
+					dataType: 'json',
+					success: async function(response) {
+						console.log(response)
+
+						if (response.code === 1) {
+
+							// Get Selectize instance for the "subjects" dropdown
+							var subjectsSelectize = $('#course')[0].selectize;
+
+							// Clear all existing options
+							await subjectsSelectize.clearOptions();
+
+							// Add the new options from the response
+							await response.data.forEach(function(subject) {
+								subjectsSelectize.addOption({
+									value: subject.subject_id,
+									text: subject.course_id
+								});
+							});
+
+							// Set the new options as selected
+							await subjectsSelectize.setValue('');
+
+							// Populate the select dropdown with data from the API
+							// var select = $('#subjects').selectize()[0].selectize;
+							// $.each(response.data, function(index, item) {
+							// 	select.addOption({
+							// 		value: item.subject_id,
+							// 		text: item.s_name
+							// 	});
+							// });
+						} else {
+							console.error(response.message);
+						}
+					},
+					error: function(error) {
+						console.error("Error fetching data:", error);
+					}
+				});
+
+				// You can perform additional actions based on the selected value
+			}
+		});
+		// Initialize Selectize on the #subjects element
+		var subjectsSelectize = $('#course').selectize({
+			// Your Selectize options, if any
+		})[0].selectize;
+
+		// Attach the onChange event after initialization
+		subjectsSelectize.on('change', function(value) {
+			// Handle the change event here
+			console.log('Selected value:', value);
+
+			// Get the text of the selected option
+			// var selectedOption = subjectsSelectize.options[value];
+			// var selectedTextDocName = selectedOption ? selectedOption.text : '';
+
+			// console.log('Selected text:', selectedTextDocName);
+			// $('#doc_name').val(selectedTextDocName)
+
+
+			// Add your additional code here
+			// For example, you can make an AJAX request or perform any other action
+		});
+	});
+</script>
+
 
 
 <script>
@@ -272,11 +403,11 @@
 
 			// Add department_id and status to the FormData object
 			formData.append('department_id', $('#department').val());
-			formData.append('course_id', $('#course_id').val());
+			formData.append('course_id', $('#course').val());
 			formData.append('class_id', $('#class_id').val());
 			formData.append('semester_id', $('#semester_id').val());
 			formData.append('status', $('#status').val());
-
+	
 			$.ajax({
 				url: 'api/upload_course.php', // The URL to send the data to
 				type: "POST",
@@ -306,29 +437,29 @@
 
 						// Assuming that jsonResponse contains the saved file information
 						// You can now make an additional AJAX request to save the data to the database
-						$.ajax({
-							url: 'api/save_to_database.php', // Replace with the actual URL to save to the database
-							type: 'POST',
-							data: {
-								doc_name: formData.get('doc_name'), // Get the document name from the form
-								doc_file: jsonResponse.savedFileName, // Get the saved file name from the response
-								department_id: formData.get('department_id'), // Get department_id from the form
-								course_id: formData.get('course_id'),
-								class_id: formData.get('class_id'),
-								semester_id: formData.get('semester_id'),
-								status: formData.get('status') // Get status from the form
+						// $.ajax({
+						// 	url: 'api/save_to_database.php', // Replace with the actual URL to save to the database
+						// 	type: 'POST',
+						// 	data: {
+						// 		doc_name: formData.get('doc_name'), // Get the document name from the form
+						// 		doc_file: jsonResponse.savedFileName, // Get the saved file name from the response
+						// 		department_id: formData.get('department_id'), // Get department_id from the form
+						// 		course_id: formData.get('course_id'),
+						// 		class_id: formData.get('class_id'),
+						// 		semester_id: formData.get('semester_id'),
+						// 		status: formData.get('status') // Get status from the form
 
-								// Add other data as needed
-							},
-							success: function(databaseResponse) {
-								console.log('Data saved to the database:', databaseResponse);
-								// Handle success or error here
-							},
-							error: function(error) {
-								console.error('Error saving data to the database:', error);
-								// Handle the database error here
-							}
-						});
+						// 		// Add other data as needed
+						// 	},
+						// 	success: function(databaseResponse) {
+						// 		console.log('Data saved to the database:', databaseResponse);
+						// 		// Handle success or error here
+						// 	},
+						// 	error: function(error) {
+						// 		console.error('Error saving data to the database:', error);
+						// 		// Handle the database error here
+						// 	}
+						// });
 					} else {
 						// Handle other cases (e.g., error messages) here if needed
 						Swal.fire({

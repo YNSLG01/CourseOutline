@@ -73,7 +73,7 @@ if (isset($_GET['id'])) {
                 <td><?= $row['course_id'] ?></td>
                 <td><?= $row['s_name'] ?></td>
                 <td><?= $row['name'],$row['surname'] ?></td>
-                <td><a href="api/editsubjects.php?<?= $row["subject_id"] ?>" class="btn btn-warning">แก้ไข</a></td>
+                <td><a href="api/editsubjects.php?id=<?= $row["subject_id"] ?>&department_id=<?php echo $department_id;?>" class="btn btn-warning">แก้ไข</a></td>
                 <td><a href="delsubjects.php?id=<?= $row["s_name"] ?> " class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a></td>
 
                 <!-- <td><a href="macth_page.php?" class="btn btn-info">รายละเอียด</a></td> -->

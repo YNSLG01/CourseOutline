@@ -1,13 +1,13 @@
 <?php
 // Include the database connection file
-include('conn.php');
+include('../conn.php');
 
 // Check if the subjects ID is provided in the URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // Query to fetch subjects details by ID
-    $sql = "SELECT * FROM science WHERE id = $id";
+    $sql = "SELECT * FROM science WHERE subject_id = $id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subjects = $_POST['new_subjects_name'];
 
     // Update the subjects in the database
-    $updateSql = "UPDATE science SET s_name = '$science' WHERE id = $id";
+    $updateSql = "UPDATE science SET s_name = '$subjects' WHERE subject_id = $id";
 
     if (mysqli_query($conn, $updateSql)) {
-        header("Location: a_subjects.php"); // Redirect to the subjects management page
+        header("Location: ../a_subjects.php?id=" . $_GET['department_id']); // Redirect to the subjects management page
         exit();
     } else {
         echo "Error updating subjects: " . mysqli_error($conn);
@@ -68,13 +68,13 @@ mysqli_close($conn);
             <form method="POST">
                 <div class="form-group">
                 <label>ลำดับ</labelfor=>
-                    <input type="text" name="subject_id" class="form-control" readonly value = "<?= $row['id'] ?>" required>
+                    <input type="text" name="subject_id" class="form-control" readonly value = "<?= $row['subject_id'] ?>" required>
                     <label for="new_subjects_name">กลุ่มสาระ</labelfor=>
                     <input type="text" name="new_subjects_name" class="form-control" value="<?= $row['s_name'] ?>" required>
                 </div>
                 <br><br>
                 <input type="submit" value="submit" class="btn btn-success">
-                <a href="a_group.php" class="btn btn-danger">Cancel</a>
+                <a href="../a_subjects.php?id=<?php echo $_GET['department_id'];?>" class="btn btn-danger">Cancel</a>
             </form>
         </div>
     </center>

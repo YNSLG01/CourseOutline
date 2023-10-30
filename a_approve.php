@@ -51,8 +51,8 @@
                 <th>สถานะ</th>
               </tr>
               <?php
-              $sql = "SELECT tbl_pdf.* , science.s_name, department.department_id FROM `tbl_pdf`
-              LEFT JOIN science ON tbl_pdf.course_id = science.course_id
+              $sql = "SELECT tbl_pdf.* , science.s_name,science.course_id, department.department_id FROM `tbl_pdf`
+              LEFT JOIN science ON tbl_pdf.course_id = science.subject_id
               LEFT JOIN department ON tbl_pdf.department_id = department.department_id";
 
               // $sql = "SELECT * FROM tbl_pdf";
